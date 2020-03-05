@@ -1,5 +1,5 @@
 import java.util.HashMap;
-
+//Варианты ответов
 public class QuestionAnswers {
     private HashMap<String,String> scoreAnswerMap;
 
