@@ -11,7 +11,7 @@ public class Theme {
         this.questionList = questionList;
     }
 
-    List<String> getQuestionList() {
+    public List<String> getQuestionList() {
         return questionList;
     }
 
