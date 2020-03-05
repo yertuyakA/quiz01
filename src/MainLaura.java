@@ -10,7 +10,7 @@ public class MainLaura {
     public static void main(String[] args) {
         Scanner file = null;
         try {
-            file = new Scanner(new FileReader("C:\\Users\\Laura_Zhumakanova\\IdeaProjects\\task2\\src\\com\\company\\scores.txt"));
+            file = new Scanner(new FileReader("C:\\Users\\Laura_Zhumakanova\\IdeaProjects\\quiz01\\src\\scores.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
