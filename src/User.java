@@ -3,7 +3,7 @@ import java.util.List;
 /**
  * Created by MSovet on 05.03.2020.
  */
-public class Users {
+public class User {
 
     private String login;
     private String password;
