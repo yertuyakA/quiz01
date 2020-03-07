@@ -1,7 +1,7 @@
 import java.util.HashMap;
 
 public class QuestionAnswers {
-    private HashMap<String,String> scoreAnswerMap = new HashMap<>();
+    private HashMap<String,String> scoreAnswerMap;
 
     void setScoreAnswerMap(HashMap<String,String> scoreAnswerMap){
         this.scoreAnswerMap = scoreAnswerMap;

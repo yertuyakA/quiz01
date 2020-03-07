@@ -1,18 +1,17 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Theme {
-    private List<String> questionList = new ArrayList<>();
+public abstract class Theme {
+    private List<QuestionAnswers> questions;
 
-    public void checkAnswer() {
+    public abstract void checkAnswers();
 
+    void setQuestionList(List<QuestionAnswers> questions) {
+        this.questions = questions;
     }
-    void setQuestionList(List<String> questionList) {
-        this.questionList = questionList;
-    }
 
-    public List<String> getQuestionList() {
-        return questionList;
+    public List<QuestionAnswers> getQuestion() {
+        return questions;
     }
 
 }
