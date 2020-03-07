@@ -26,5 +26,7 @@ public class Users {
     String getNickname () {return nickname;}
     int getMaxScore () {return maxScore;}
 
-
+    public List<Integer> getScorelist() {
+        return scorelist;
+    }
 }
