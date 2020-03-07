@@ -1,10 +1,12 @@
+package oldHomework;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Issatay {
+public class MainIssatay {
 
     public static void main(String[] args)/*L15*/ {
             Scanner file = null;

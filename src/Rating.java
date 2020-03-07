@@ -1,18 +1,20 @@
 import java.util.HashMap;
 
 public class Rating {
-   private HashMap<String,String> userRatingMap;
+   private HashMap<User,Integer> userRatingMap;
 
 
-    private void setUserRatingMap( HashMap<String,String> userRatingMap){
+    private void setUserRatingMap( HashMap<User,Integer> userRatingMap){
+
         this.userRatingMap = userRatingMap;
     }
 
 
-    HashMap<String,String> getuserRatingMap(){
+    public HashMap<User, Integer> getUserRatingMap(){
         return userRatingMap;
     }
-    void sortUsers(){
+
+    public void sortUsers(){
 
     }
 
