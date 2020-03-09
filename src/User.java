@@ -18,6 +18,7 @@ public class User {
     void setPassword(String password){this.password = password;}
     void setNickname(String nickname){this.nickname = nickname;}
     void setMaxScore(int maxScore){this.maxScore = maxScore;}
+
     void setScorelist(List <Integer> scorelist) {
         this.scorelist = scorelist;
     }
@@ -37,9 +38,9 @@ public class User {
                 '}';
     }
 
-    String getPassword () {return password;}
-    String getNickname () {return nickname;}
-    int getMaxScore () {return maxScore;}
+    String getPassword() {return password;}
+    String getNickname() {return nickname;}
+    int getMaxScore() {return maxScore;}
 
     public List<Integer> getScorelist() {
         return scorelist;
