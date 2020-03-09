@@ -10,6 +10,7 @@ public abstract class Theme {
     private String wrongAnswer1;
     private String wrongAnswer2;
     private String wrongAnswer3;
+    private int point;
 
     public abstract void checkAnswers();
 
@@ -20,6 +21,7 @@ public abstract class Theme {
     void setWrongAnswer1(String wrongAnswer1) {this.wrongAnswer1 = wrongAnswer1;}
     void setWrongAnswer2(String wrongAnswer2) {this.wrongAnswer2 = wrongAnswer2;}
     void setWrongAnswer3(String wrongAnswer3) {this.wrongAnswer3 = wrongAnswer3;}
+    void setPoint(int point) {this.point = point;}
 
     void setQuestionList(List<QuestionAnswers> questions) {
         this.questions = questions;
@@ -32,6 +34,7 @@ public abstract class Theme {
     String getWrongAnswer1() {return wrongAnswer1;}
     String getWrongAnswer2() {return wrongAnswer2;}
     String getWrongAnswer3() {return wrongAnswer3;}
+    int getPoint() {return point;}
 
     public List<QuestionAnswers> getQuestions() {
         return questions;
@@ -39,14 +42,15 @@ public abstract class Theme {
 
     @Override
     public String toString() {
-        return "Theme{"+
+        return "Theme{" +
                 "id=" + id +
-                ", themeId=" + themeId + '\'' +
+                ", themeId=" + themeId +
                 ", question='" + question + '\'' +
                 ", answer='" + answer + '\'' +
                 ", wrongAnswer1='" + wrongAnswer1 + '\'' +
                 ", wrongAnswer2='" + wrongAnswer2 + '\'' +
                 ", wrongAnswer3='" + wrongAnswer3 + '\'' +
+                ", point=" + point +
                 '}';
     }
 }

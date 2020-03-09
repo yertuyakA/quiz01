@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /****************************
@@ -13,6 +14,7 @@ public class Main {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/quiz","root", ""); //quiz - наша база
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select*from users");
+
 
             List<User> users = new ArrayList<>();
             while (rs.next()){
@@ -29,6 +31,7 @@ public class Main {
 
             ResultSet mq = stmt.executeQuery("select*from question_answers where theme_id = 1");
 
+            HashMap<String, List<Movie>> movieMap = new HashMap<>();
             List<Movie> movieTheme = new ArrayList<>();
             while (mq.next()){
                 Theme movieQuestion = new Movie();
@@ -39,14 +42,18 @@ public class Main {
                 movieQuestion.setWrongAnswer1(mq.getString(5));
                 movieQuestion.setWrongAnswer2(mq.getString(6));
                 movieQuestion.setWrongAnswer3(mq.getString(7));
+                movieQuestion.setPoint(mq.getInt(8));
 
                 movieTheme.add((Movie) movieQuestion);
+                movieMap.put("movies", movieTheme);
 
             }
-            System.out.println(movieTheme);
+
+            System.out.println(movieMap);
 
             ResultSet sq = stmt.executeQuery("select*from question_answers where theme_id = 2");
 
+            HashMap<String, List<SportLegend>> sportLegendMap = new HashMap<>();
             List<SportLegend> sportLegendTheme = new ArrayList<>();
             while (sq.next()){
                 Theme sportLegendQuestion = new SportLegend();
@@ -57,12 +64,14 @@ public class Main {
                 sportLegendQuestion.setWrongAnswer1(sq.getString(5));
                 sportLegendQuestion.setWrongAnswer2(sq.getString(6));
                 sportLegendQuestion.setWrongAnswer3(sq.getString(7));
+                sportLegendQuestion.setPoint(sq.getInt(8));
 
                 sportLegendTheme.add((SportLegend) sportLegendQuestion);
+                sportLegendMap.put("sports legends", sportLegendTheme);
 
             }
-            System.out.println(sportLegendTheme);
 
+            System.out.println(sportLegendMap);
 
 
         } catch (ClassNotFoundException | SQLException e) {
