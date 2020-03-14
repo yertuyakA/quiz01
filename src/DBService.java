@@ -22,7 +22,7 @@ public class DBService {
             pstm.setString(2, password);
             ResultSet rs = pstm.executeQuery();
             if(!rs.next()){
-                System.out.println("User не найден");
+                System.out.println("Пользователь не найден");
             }else{
                 return true;
             }
