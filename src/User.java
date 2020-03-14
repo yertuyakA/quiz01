@@ -9,6 +9,7 @@ public class User {
     private String password;
     private String nickname;
     private int maxScore;
+    private int id;
     private List<Integer> scorelist;
 
     void setLogin(String login) {
@@ -17,6 +18,7 @@ public class User {
     void setPassword(String password){this.password = password;}
     void setNickname(String nickname){this.nickname = nickname;}
     void setMaxScore(int maxScore){this.maxScore = maxScore;}
+    void setId(int id){this.id = id;}
     void setScorelist(List <Integer> scorelist) {
         this.scorelist = scorelist;
     }
@@ -25,6 +27,14 @@ public class User {
     String getPassword () {return password;}
     String getNickname () {return nickname;}
     int getMaxScore () {return maxScore;}
+    int getId () {return id;}
+
+    @Override
+    public String toString() {
+        return "ID " + this.getId()+
+                "NickName: "+this.getNickname();
+    }
+
 
     public List<Integer> getScorelist() {
         return scorelist;
