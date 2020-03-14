@@ -1,4 +1,4 @@
-public class SportLegend extends Theme {
+public class SportLegendTheme extends Theme {
 
     @Override
     public void checkAnswers() {

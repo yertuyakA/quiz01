@@ -31,10 +31,10 @@ public class Main {
 
             ResultSet mq = stmt.executeQuery("select*from question_answers where theme_id = 1");
 
-            HashMap<String, List<Movie>> movieMap = new HashMap<>();
-            List<Movie> movieTheme = new ArrayList<>();
+            HashMap<String, List<MovieTheme>> movieMap = new HashMap<>();
+            List<MovieTheme> movieTheme = new ArrayList<>();
             while (mq.next()){
-                Theme movieQuestion = new Movie();
+                Theme movieQuestion = new MovieTheme();
                 movieQuestion.setId(mq.getInt(1));
                 movieQuestion.setThemeId(mq.getInt(2));
                 movieQuestion.setQuestion(mq.getString(3));
@@ -44,7 +44,7 @@ public class Main {
                 movieQuestion.setWrongAnswer3(mq.getString(7));
                 movieQuestion.setPoint(mq.getInt(8));
 
-                movieTheme.add((Movie) movieQuestion);
+                movieTheme.add((MovieTheme) movieQuestion);
                 movieMap.put("movies", movieTheme);
 
             }
@@ -53,10 +53,10 @@ public class Main {
 
             ResultSet sq = stmt.executeQuery("select*from question_answers where theme_id = 2");
 
-            HashMap<String, List<SportLegend>> sportLegendMap = new HashMap<>();
-            List<SportLegend> sportLegendTheme = new ArrayList<>();
+            HashMap<String, List<SportLegendTheme>> sportLegendMap = new HashMap<>();
+            List<SportLegendTheme> sportLegendTheme = new ArrayList<>();
             while (sq.next()){
-                Theme sportLegendQuestion = new SportLegend();
+                Theme sportLegendQuestion = new SportLegendTheme();
                 sportLegendQuestion.setId(sq.getInt(1));
                 sportLegendQuestion.setThemeId(sq.getInt(2));
                 sportLegendQuestion.setQuestion(sq.getString(3));
@@ -66,7 +66,7 @@ public class Main {
                 sportLegendQuestion.setWrongAnswer3(sq.getString(7));
                 sportLegendQuestion.setPoint(sq.getInt(8));
 
-                sportLegendTheme.add((SportLegend) sportLegendQuestion);
+                sportLegendTheme.add((SportLegendTheme) sportLegendQuestion);
                 sportLegendMap.put("sports legends", sportLegendTheme);
 
             }
