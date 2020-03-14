@@ -40,9 +40,8 @@ public class MainService {
         String writeLogin = in.nextLine();
         System.out.println("Пароль:");
         String writePassword = in.nextLine();
-        //проверка на уникальность в БД
         if(dBService.loginExist(writeLogin)) {
-
+            //проверка на уникальность поля login в таблице users
         } else {
             dBService.write(writeNickname, writePassword, writeLogin);
             System.out.println("Вы успешно зарегистрированы!");
