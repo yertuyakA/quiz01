@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Theme {
+
     private List<QuestionAnswers> questions;
 
     public abstract void checkAnswers();
@@ -12,6 +13,15 @@ public abstract class Theme {
 
     public List<QuestionAnswers> getQuestion() {
         return questions;
+    }
+
+    String title;
+    void setTitle(String title){
+        this.title = title;
+    }
+
+    String getTitle(){
+        return title;
     }
 
 }
