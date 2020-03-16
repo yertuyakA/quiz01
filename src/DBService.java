@@ -46,7 +46,6 @@ public class DBService {
 
     public void write(String writeNickname, String writePassword, String writeLogin) throws
         SQLException {
-            String sql = "INSERT INTO users (nickname , password, login) values(?, ?, ?)";
            PreparedStatement pstm = con.prepareStatement ("INSERT INTO users (nickname, password, login) values(?, ?, ?)");
             pstm.setString(1, writeNickname);
             pstm.setString(2, writePassword);
