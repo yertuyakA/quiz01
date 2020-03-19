@@ -33,6 +33,12 @@ public class DBService {
         // select * from users where login = 'Qwer' and password = 'Qwerty123'
 
     }
-
+public void createUser(String login,String password, String nickname) throws SQLException {
+    PreparedStatement prpd = con.prepareStatement("insert into users(nickname,password,login) values(?,?,?)");
+    prpd.setString(1,login);
+    prpd.setString(2,password);
+    prpd.setString(3,nickname);
+    prpd.execute();
+   }
 }
 

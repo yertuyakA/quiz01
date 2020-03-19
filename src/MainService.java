@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class MainService {
     DBService dBService;
-    Connection con;
+
 
     public void run() throws SQLException {
         dBService = new DBService();
@@ -30,13 +30,15 @@ public class MainService {
             Scanner scr = new Scanner(System.in);
             String a = scr.nextLine();
             if(a.equals("Да")){
-                PreparedStatement prpd = con.prepareStatement("insert into users "+ "values(?,?,?)");
-                prpd.setString(1,login);
-                prpd.setString(2,password);
-                prpd.setString(3,nickname);
-                prpd.execute();
+                System.out.println("Введите логин:");
+                login = sc.nextLine();
+                System.out.println("Введите пароль:");
+                password = sc.nextLine();
+                System.out.println("Введите имя:");
+                nickname = sc.nextLine();
+                dBService.createUser(login,password,nickname);
             }
-            else if(a.equals("Нет")){
+            else {
                 System.out.println("До свидания");
             }
         }
