@@ -1,0 +1,15 @@
+
+
+import javafx.FXML;
+import javafx.scene.control.Button;
+
+public class MainController {
+    @FXML
+    Button mainButton;
+    @FXML
+    void click(){
+        mainButton.setText("GGG");
+
+    }
+
+}
