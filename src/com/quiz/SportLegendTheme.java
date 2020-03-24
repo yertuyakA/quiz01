@@ -1,3 +1,5 @@
+package com.quiz;
+
 public class SportLegendTheme extends Theme {
 
     @Override

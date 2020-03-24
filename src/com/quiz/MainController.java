@@ -1,3 +1,5 @@
+package com.quiz;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 

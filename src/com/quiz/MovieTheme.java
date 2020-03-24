@@ -1,4 +1,4 @@
-
+package com.quiz;
 
 public class MovieTheme extends Theme {
     @Override

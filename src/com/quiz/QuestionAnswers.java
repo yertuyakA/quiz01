@@ -1,3 +1,5 @@
+package com.quiz;
+
 import java.util.HashMap;
 //Варианты ответов
 public class QuestionAnswers {
