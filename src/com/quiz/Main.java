@@ -10,6 +10,8 @@ import java.net.URL;
 import java.sql.SQLException;
 
 
+
+
 public class Main extends Application {
 
     public static void main(String[] args) {
@@ -27,7 +29,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getResource("com/quiz/main.fxml");
+        URL xmlUrl = getClass().getResource("main.fxml");
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
 
