@@ -1,9 +1,8 @@
-
-
-import javafx.FXML;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 public class MainController {
+
     @FXML
     Button mainButton;
     @FXML

@@ -1,8 +1,8 @@
-import javafx.FXMLLoader;
-import javafx.Stage;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Application;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -18,6 +18,7 @@ public class Main extends Application {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         launch(args);
     }
 

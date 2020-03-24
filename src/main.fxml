@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
     <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/javafx">
@@ -13,7 +12,6 @@
     <Button fx:id="mainButton" layoutX="152.0" layoutY="220.0" onAction="#click" text="Log in!" />
     <PasswordField layoutX="152.0" layoutY="175.0" />
     <TextField layoutX="152.0" layoutY="124.0" />
-   <TextFlow layoutX="152.0" layoutY="90.0" prefHeight="26.0" prefWidth="121.0"  />
 
 
 </AnchorPane>
