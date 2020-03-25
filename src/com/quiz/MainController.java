@@ -1,16 +1,36 @@
 package com.quiz;
 
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
-public class MainController {
+import java.sql.SQLException;
+
+public class MainController  extends MainService {
 
     @FXML
-    Button mainButton;
+    TextField enterLogin, promptField, enterNickname;
     @FXML
-    void click(){
-        mainButton.setText("GGG");
+    PasswordField enterPassword;
+    @FXML
+    Button mainButton, registerButton;
 
+
+    @FXML
+    void click() {
+      mainButton.setOnAction(new MainService() {
+            @Override
+            public void run() throws SQLException {
+                super.run();
+            }
+        });
+/*
+     mainButton.setText("OK");
+     String login = enterLogin.getText();
+     String password = enterPassword.getText();
+     promptField.setText(login+"/"+password);
+*/
     }
-
 }

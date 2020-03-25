@@ -5,6 +5,7 @@ import java.sql.*;
 public class DBService {
     Connection con;
     Statement stmt;
+    MainController mainController;
 
     public DBService() {
         try {

@@ -1,19 +1,32 @@
 package com.quiz;
 
-import java.sql.SQLException;
-import java.util.Scanner;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 
-public class MainService {
+import java.sql.SQLException;
+
+public class MainService implements EventHandler {
     DBService dBService;
+    MainController mainController;
+
+    @Override
+    public void handle(Event arg0) {
+        try {
+            login();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public void run() throws SQLException {
         dBService = new DBService();
         // здесь будет наша логика
-
+        mainController = new MainController();
         login();
         //createUser();
     }
-
+/*ввод данных с консоли
         public void login() throws SQLException {
             Scanner sc = new Scanner(System.in);
             System.out.println("Введите логин");
@@ -34,6 +47,8 @@ public class MainService {
             }
         }
   }
+
+
     public void createUser() throws SQLException {
         System.out.println("Nickname:");
         Scanner in = new Scanner(System.in);
@@ -48,6 +63,19 @@ public class MainService {
             dBService.write(writeNickname, writePassword, writeLogin);
             System.out.println("Вы успешно зарегистрированы!");
             login();
+        }
+    }
+    */
+
+
+    public void login() throws SQLException {
+        String login = mainController.enterLogin.getText();
+        String password = mainController.enterPassword.getText();
+        if (dBService.isRegistered(login, password)) {
+            mainController.promptField.setText("Вы вошли в систему");
+        } else {
+            mainController.promptField.setText("Введены неверные данные. Нажмите кнопку 'Регистрация' для регистрации в системе");
+
         }
     }
 

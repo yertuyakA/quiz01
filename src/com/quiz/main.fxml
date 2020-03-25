@@ -9,9 +9,16 @@
     </VBox>
 
 
-    <Button fx:id="mainButton" layoutX="152.0" layoutY="220.0" onAction="#click" text="Log in!" />
-    <PasswordField layoutX="152.0" layoutY="175.0" />
-    <TextField layoutX="152.0" layoutY="124.0" />
+    <Button fx:id="mainButton" layoutX="152.0" layoutY="240.0" onAction="#click" text="Log in" />
+    <Button fx:id="registerButton" layoutX="212.0" layoutY="240.0" onAction="#click" text="Регистрация" />
+    <PasswordField fx:id="enterPassword" layoutX="152.0" layoutY="145.0" />
+    <TextField fx:id="enterLogin" layoutX="152.0" layoutY="90.0" />
+    <TextField fx:id="enterNickname" layoutX="152.0" layoutY="205.0" />
+   <Label layoutX="152.0" layoutY="70.0" text="Логин" />
+   <Label layoutX="152.0" layoutY="125.0" text="Пароль" />
+    <Label layoutX="152.0" layoutY="180.0" text="Nickname" />
+   <Label layoutX="182.0" layoutY="34.0" text="Quiz-2020" />
+   <TextField fx:id="promptField" layoutX="152.0" layoutY="274.0" text="Введите данные для авторизации" />
 
 
 </AnchorPane>

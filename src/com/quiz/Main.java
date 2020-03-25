@@ -14,7 +14,9 @@ import java.sql.SQLException;
 
 public class Main extends Application {
 
+
     public static void main(String[] args) {
+        launch(args);
 
         MainService mainService = new MainService();
         try {
@@ -23,7 +25,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
-        launch(args);
+
     }
 
     @Override
@@ -37,6 +39,7 @@ public class Main extends Application {
         primaryStage.show();
 
     }
+
 
     
 }
