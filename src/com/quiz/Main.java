@@ -18,12 +18,12 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
 
-        MainService mainService = new MainService();
-        try {
-            mainService.run();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        MainService mainService = new MainService();
+//        try {
+//            mainService.run();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
 
 
     }

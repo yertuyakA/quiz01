@@ -5,20 +5,11 @@ import javafx.event.EventHandler;
 
 import java.sql.SQLException;
 
-public class MainService implements EventHandler {
+public class MainService {
     DBService dBService;
     MainController mainController;
 
-    @Override
-    public void handle(Event arg0) {
-        try {
-            login();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
+// для консоли
     public void run() throws SQLException {
         dBService = new DBService();
         // здесь будет наша логика
@@ -26,6 +17,7 @@ public class MainService implements EventHandler {
         login();
         createUser();
     }
+
 /*авторизация с консоли
         //авторизация в консоли;
         public void login() throws SQLException {
@@ -69,7 +61,7 @@ public class MainService implements EventHandler {
     */
 
     //Авторизация;
-    public void login() throws SQLException {
+     public void login() throws SQLException {
         String login = mainController.enterLogin.getText();
         String password = mainController.enterPassword.getText();
         if (dBService.isRegistered(login, password)) {
@@ -78,6 +70,15 @@ public class MainService implements EventHandler {
             mainController.promptArea.setText("Введены неверные данные. Нажмите кнопку 'Регистрация' для регистрации в системе");
 
         }
+    }
+
+    public boolean login(String login, String password){
+        try {
+            return dBService.isRegistered(login, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     //Регистрация;

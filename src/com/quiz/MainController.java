@@ -6,7 +6,7 @@ import javafx.scene.control.*;
 
 import java.sql.SQLException;
 
-public class MainController  extends MainService {
+public class MainController{
 
     @FXML
     TextField enterLogin, enterNickname;
@@ -19,15 +19,24 @@ public class MainController  extends MainService {
     @FXML
     Label labelNickname;
 
+    DBService dbService;
+
+
+
+
     @FXML
     void click() {
         //запуск авторизации при нажатии кнопки Log in;
-      mainButton.setOnAction(new MainService() {
-            @Override
-            public void run() throws SQLException {
-                super.run();
+        dbService = new DBService();
+
+        try {
+            if(dbService.isRegistered(enterLogin.getText().toString(), enterPassword.getText().toString())){
+              System.out.println("TRUE!!!");
             }
-        });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 /*
      mainButton.setText("OK");
      String login = enterLogin.getText();
@@ -45,12 +54,6 @@ public class MainController  extends MainService {
         labelNickname.setVisible(true);
         promptArea.setText("Заполните данные для регистрации");
         mainButton.setVisible(false);
-        registerButton.setOnAction(new MainService() {
-            @Override
-            public void createUser() throws SQLException {
-                super.createUser();
-            }
-        });
 
     }
 }
