@@ -23,9 +23,10 @@ public class MainController{
     @FXML
     PasswordField enterPassword;
     @FXML
-    Button mainButton, registerButton;
+    Button mainButton, registerButton, btnTheme, btnScore, btnExit, btnSimple;
     @FXML
-    Label labelNickname;
+    Label labelNickname, userMaxScore;
+
 
     DBService dbService;
 
@@ -36,7 +37,6 @@ public class MainController{
     void click(ActionEvent event) {
         //запуск авторизации при нажатии кнопки Log in;
         dbService = new DBService();
-        System.out.println("эта кнопка");
 
         try {
             if(dbService.isRegistered(enterLogin.getText().toString(), enterPassword.getText().toString())){
@@ -53,7 +53,6 @@ public class MainController{
             e.printStackTrace();
 
         }
-        System.out.println("конец кнопки");
 
 /*
      mainButton.setText("OK");
@@ -73,5 +72,20 @@ public class MainController{
         promptArea.setText("Заполните данные для регистрации");
         mainButton.setVisible(false);
 
+    }
+
+    @FXML
+    void getScore() {
+        //выводить счет пользователя из базы поле max_score;
+    }
+
+    @FXML
+    void getTheme() {
+     //выводить  окно выбора тем с вопросами;
+    }
+
+    @FXML
+    void exitQuiz() {
+        //выход из программы;
     }
 }
