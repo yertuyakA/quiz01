@@ -23,9 +23,9 @@ public class DBService {
             pstm.setString(2, password);
             ResultSet rs = pstm.executeQuery();
             if(!rs.next()){
-                return true;
-            }else{
                 return false;
+            }else{
+                return true;
             }
 
 
