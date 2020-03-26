@@ -23,12 +23,11 @@ public class DBService {
             pstm.setString(2, password);
             ResultSet rs = pstm.executeQuery();
             if(!rs.next()){
-                mainController.promptArea.setText("Пользователь не найден");
-            }else{
                 return true;
+            }else{
+                return false;
             }
 
-            return false;
 
         }
 
@@ -37,11 +36,11 @@ public class DBService {
         pstm.setString(1, writeLogin);
         ResultSet log = pstm.executeQuery();
         if(log.next()) {
-            mainController.promptArea.setText("Логин уже существует.");
+            return true;
         } else {
             return false;
         }
-        return true;
+
     }
 
 
