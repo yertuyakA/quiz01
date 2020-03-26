@@ -10,15 +10,15 @@
 
 
     <Button fx:id="mainButton" layoutX="152.0" layoutY="240.0" onAction="#click" text="Log in" />
-    <Button fx:id="registerButton" layoutX="212.0" layoutY="240.0" onAction="#click" text="Регистрация" />
+    <Button fx:id="registerButton" layoutX="212.0" layoutY="240.0" onAction="#click1" text="Регистрация" />
     <PasswordField fx:id="enterPassword" layoutX="152.0" layoutY="145.0" />
     <TextField fx:id="enterLogin" layoutX="152.0" layoutY="90.0" />
-    <TextField fx:id="enterNickname" layoutX="152.0" layoutY="205.0" />
+    <TextField fx:id="enterNickname" layoutX="152.0" layoutY="205.0" visible="false" />
    <Label layoutX="152.0" layoutY="70.0" text="Логин" />
    <Label layoutX="152.0" layoutY="125.0" text="Пароль" />
-    <Label layoutX="152.0" layoutY="180.0" text="Nickname" />
+    <Label fx:id="labelNickname" layoutX="152.0" layoutY="180.0" text="Nickname" visible="false" />
    <Label layoutX="182.0" layoutY="34.0" text="Quiz-2020" />
-   <TextField fx:id="promptField" layoutX="152.0" layoutY="274.0" text="Введите данные для авторизации" />
+   <TextArea fx:id="promptArea" layoutX="150.0" layoutY="274.0" prefHeight="70.0" prefWidth="300.0" text="Введите данные для авторизации" />
 
 
 </AnchorPane>

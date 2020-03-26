@@ -24,9 +24,10 @@ public class MainService implements EventHandler {
         // здесь будет наша логика
         mainController = new MainController();
         login();
-        //createUser();
+        createUser();
     }
-/*ввод данных с консоли
+/*авторизация с консоли
+        //авторизация в консоли;
         public void login() throws SQLException {
             Scanner sc = new Scanner(System.in);
             System.out.println("Введите логин");
@@ -48,7 +49,7 @@ public class MainService implements EventHandler {
         }
   }
 
-
+    //регистрация в консоли;
     public void createUser() throws SQLException {
         System.out.println("Nickname:");
         Scanner in = new Scanner(System.in);
@@ -67,15 +68,32 @@ public class MainService implements EventHandler {
     }
     */
 
-
+    //Авторизация;
     public void login() throws SQLException {
         String login = mainController.enterLogin.getText();
         String password = mainController.enterPassword.getText();
         if (dBService.isRegistered(login, password)) {
-            mainController.promptField.setText("Вы вошли в систему");
+            mainController.promptArea.setText("Вы вошли в систему");
         } else {
-            mainController.promptField.setText("Введены неверные данные. Нажмите кнопку 'Регистрация' для регистрации в системе");
+            mainController.promptArea.setText("Введены неверные данные. Нажмите кнопку 'Регистрация' для регистрации в системе");
 
+        }
+    }
+
+    //Регистрация;
+    public void createUser() throws SQLException {
+        String writeNickname = mainController.enterNickname.getText();
+        String writeLogin = mainController.enterLogin.getText();
+        String writePassword = mainController.enterPassword.getText();
+        if(dBService.loginExist(writeLogin)) {
+            //проверка на уникальность поля login в таблице users;
+        } else {
+            dBService.write(writeNickname, writePassword, writeLogin);
+            mainController.promptArea.setText("Вы успешно зарегистрированы!");
+            mainController.registerButton.setText("Регистрация");
+            mainController.labelNickname.setVisible(false);
+            mainController.enterNickname.setVisible(false);
+            mainController.mainButton.setVisible(true);
         }
     }
 

@@ -6,8 +6,8 @@ public class DBService {
     Connection con;
     Statement stmt;
     MainController mainController;
-
     public DBService() {
+        mainController = new MainController();
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/quiz", "root", ""); //quiz - наша база
@@ -23,13 +23,13 @@ public class DBService {
             pstm.setString(2, password);
             ResultSet rs = pstm.executeQuery();
             if(!rs.next()){
-                System.out.println("Пользователь не найден");
+                mainController.promptArea.setText("Пользователь не найден");
             }else{
                 return true;
             }
 
             return false;
-            // select * from users where login = 'Qwer' and password = 'Qwerty123'
+
         }
 
     public boolean loginExist(String writeLogin) throws SQLException {
@@ -37,7 +37,7 @@ public class DBService {
         pstm.setString(1, writeLogin);
         ResultSet log = pstm.executeQuery();
         if(log.next()) {
-            System.out.println("Логин уже существует.");
+            mainController.promptArea.setText("Логин уже существует.");
         } else {
             return false;
         }
