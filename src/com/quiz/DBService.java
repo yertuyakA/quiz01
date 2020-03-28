@@ -46,13 +46,21 @@ public class DBService {
 
     public void write(String writeNickname, String writePassword, String writeLogin) throws
         SQLException {
-           PreparedStatement pstm = con.prepareStatement ("INSERT INTO users (nickname, password, login) values(?, ?, ?)");
+            PreparedStatement pstm = con.prepareStatement ("INSERT INTO users (nickname, password, login) values(?, ?, ?)");
             pstm.setString(1, writeNickname);
             pstm.setString(2, writePassword);
             pstm.setString(3, writeLogin);
             pstm.execute();
         }
 
+    public void getMaxScore(String activeLogin, int maxScore) throws
+         SQLException {
+            mainController = new MainController();
+            PreparedStatement pstm = con.prepareStatement("select login, max_score from users where login = ?");
+            pstm.setString(1, activeLogin);
+            pstm.setInt(2, maxScore);
+            pstm.execute();
 
+    }
 }
 

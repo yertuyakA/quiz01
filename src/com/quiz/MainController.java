@@ -29,15 +29,21 @@ public class MainController{
 
 
     DBService dbService;
+    private String activeLogin;
 
+    void setActiveLogin(String activeLogin) {
+        this.activeLogin = activeLogin;
+    }
 
-
+    String getActiveLogin() {
+        return activeLogin;
+    }
 
     @FXML
     void click(ActionEvent event) {
         //запуск авторизации при нажатии кнопки Log in;
         dbService = new DBService();
-
+        activeLogin = enterLogin.getText().toString();
         try {
             if(dbService.isRegistered(enterLogin.getText().toString(), enterPassword.getText().toString())){
                 System.out.println("TRUE!!!");
@@ -54,14 +60,6 @@ public class MainController{
 
         }
 
-/*
-     mainButton.setText("OK");
-     String login = enterLogin.getText();
-     String password = enterPassword.getText();
-     promptField.setText(login+"/"+password);
-*/
-
-
     }
 
     @FXML
@@ -76,7 +74,18 @@ public class MainController{
 
     @FXML
     void getScore() {
-        //выводить счет пользователя из базы поле max_score;
+        userMaxScore.setVisible(true);
+        dbService = new DBService();
+        //вывод счета пользователя из базы поле max_score;
+        int maxScore = 0;
+        try {
+            dbService.getMaxScore(activeLogin, maxScore);
+            userMaxScore.setText("maxScore");
+            System.out.println("Счет: "+maxScore);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML
