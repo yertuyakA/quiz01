@@ -43,16 +43,19 @@ public class MainController{
     void click(ActionEvent event) {
         //запуск авторизации при нажатии кнопки Log in;
         dbService = new DBService();
-        activeLogin = enterLogin.getText().toString();
+
         try {
             if(dbService.isRegistered(enterLogin.getText().toString(), enterPassword.getText().toString())){
                 System.out.println("TRUE!!!");
+                activeLogin = enterLogin.getText().toString();
+                System.out.println(activeLogin);
 
                 URL xmlUrl = getClass().getResource("menu.fxml");
                 Parent root = FXMLLoader.load(xmlUrl);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene sc = new Scene(root);
                 stage.setScene(sc);
+
 
             }
         } catch (SQLException | IOException e) {
@@ -77,9 +80,10 @@ public class MainController{
         userMaxScore.setVisible(true);
         dbService = new DBService();
         //вывод счета пользователя из базы поле max_score;
+        System.out.println(activeLogin);
         int maxScore = 0;
         try {
-            dbService.getMaxScore(activeLogin, maxScore);
+            maxScore = dbService.getMaxScore(activeLogin);
             userMaxScore.setText("maxScore");
             System.out.println("Счет: "+maxScore);
         } catch (SQLException e) {

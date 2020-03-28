@@ -53,14 +53,28 @@ public class DBService {
             pstm.execute();
         }
 
-    public void getMaxScore(String activeLogin, int maxScore) throws
+    public int getMaxScore(String activeLogin) throws
          SQLException {
             mainController = new MainController();
-            PreparedStatement pstm = con.prepareStatement("select login, max_score from users where login = ?");
+            PreparedStatement pstm = con.prepareStatement("select max_score from users where login = ?");
             pstm.setString(1, activeLogin);
-            pstm.setInt(2, maxScore);
-            pstm.execute();
+            pstm.executeQuery();
+            ResultSet sc = pstm.executeQuery();
+            //int maxScore = sc;
+            return sc.getInt(1);
+
 
     }
+
+
+
+    public void getTheme() throws
+        SQLException {
+            PreparedStatement pstm = con.prepareStatement("select * from question_answers");
+            ResultSet rs = pstm.executeQuery();
+
+
+        }
+
 }
 
