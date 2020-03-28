@@ -48,7 +48,7 @@ public class MainController{
             if(dbService.isRegistered(enterLogin.getText().toString(), enterPassword.getText().toString())){
                 System.out.println("TRUE!!!");
                 activeLogin = enterLogin.getText().toString();
-                System.out.println(activeLogin);
+                System.out.println(activeLogin+" authorized");
 
                 URL xmlUrl = getClass().getResource("menu.fxml");
                 Parent root = FXMLLoader.load(xmlUrl);
@@ -80,15 +80,15 @@ public class MainController{
         userMaxScore.setVisible(true);
         dbService = new DBService();
         //вывод счета пользователя из базы поле max_score;
-        System.out.println(activeLogin);
         int maxScore = 0;
         try {
             maxScore = dbService.getMaxScore(activeLogin);
-            userMaxScore.setText("maxScore");
+            userMaxScore.setText("Счет: "+String.valueOf(maxScore));
             System.out.println("Счет: "+maxScore);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
 
     }
 

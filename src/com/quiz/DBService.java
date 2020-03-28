@@ -56,12 +56,16 @@ public class DBService {
     public int getMaxScore(String activeLogin) throws
          SQLException {
             mainController = new MainController();
-            PreparedStatement pstm = con.prepareStatement("select max_score from users where login = ?");
-            pstm.setString(1, activeLogin);
-            pstm.executeQuery();
-            ResultSet sc = pstm.executeQuery();
-            //int maxScore = sc;
-            return sc.getInt(1);
+        PreparedStatement pstm = con.prepareStatement("select max_score from users where login = ?");
+        pstm.setString(1, activeLogin);
+        ResultSet sc = pstm.executeQuery();
+        int score = 0;
+        if(sc.next()){
+            score = sc.getInt(1);
+        }
+        System.out.println(score);
+
+        return score;
 
 
     }
