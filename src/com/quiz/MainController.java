@@ -29,7 +29,7 @@ public class MainController{
 
 
     DBService dbService;
-    private String activeLogin;
+    private static String activeLogin;
 
     void setActiveLogin(String activeLogin) {
         this.activeLogin = activeLogin;
