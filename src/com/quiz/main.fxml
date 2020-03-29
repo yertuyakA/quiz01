@@ -3,14 +3,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFFE0;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.MainController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.MainController">
     <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/javafx">
 
     </VBox>
 
 
     <Button fx:id="mainButton" layoutX="152.0" layoutY="240.0" onAction="#click" style="-fx-background-color: #98FB98;" text="Log in" />
-    <Button fx:id="registerButton" layoutX="212.0" layoutY="240.0" onAction="#click1" style="-fx-background-color: #FFDAB9;" text="Регистрация" />
+    <Button fx:id="registerButton" layoutX="224.0" layoutY="240.0" onAction="#click1" style="-fx-background-color: #FFDAB9;" text="Регистрация" />
     <PasswordField fx:id="enterPassword" layoutX="152.0" layoutY="145.0" />
     <TextField fx:id="enterLogin" layoutX="152.0" layoutY="90.0" />
     <TextField fx:id="enterNickname" layoutX="152.0" layoutY="205.0" visible="false" />

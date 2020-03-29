@@ -23,9 +23,9 @@ public class MainController{
     @FXML
     PasswordField enterPassword;
     @FXML
-    Button mainButton, registerButton, btnTheme, btnScore, btnExit, btnSimple;
+    Button mainButton, registerButton, btnTheme, btnScore, btnSimple, btnSportTheme, btnMovieTheme, answer1, answer2, answer3, answer4;
     @FXML
-    Label labelNickname, userMaxScore;
+    Label labelNickname, userMaxScore, questTheme;
 
 
     DBService dbService;
@@ -84,7 +84,6 @@ public class MainController{
         try {
             maxScore = dbService.getMaxScore(activeLogin);
             userMaxScore.setText("Счет: "+String.valueOf(maxScore));
-            System.out.println("Счет: "+maxScore);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -93,12 +92,19 @@ public class MainController{
     }
 
     @FXML
-    void getTheme() {
+    void getTheme(ActionEvent event) throws IOException {
      //выводить  окно выбора тем с вопросами;
+            URL xmlUrl = getClass().getResource("theme.fxml");
+            Parent root = FXMLLoader.load(xmlUrl);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene sc = new Scene(root);
+            stage.setScene(sc);
+
     }
 
     @FXML
     void exitQuiz() {
         //выход из программы;
+        System.exit(1);
     }
 }

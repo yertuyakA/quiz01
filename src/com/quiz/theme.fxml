@@ -2,12 +2,21 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFFE0;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.Theme">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.MainController">
    <children>
       <Label layoutX="42.0" layoutY="43.0" prefHeight="14.0" prefWidth="282.0" text="Выберите тему" />
-      <Button layoutX="42.0" layoutY="77.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="184.0" style="-fx-background-color: #F0E68C;" text="Легенды спорта" />
-      <Button layoutX="259.0" layoutY="77.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="184.0" style="-fx-background-color: #D8BFD8;" text="Кино" />
+      <Button fx:id="btnSportTheme" layoutX="42.0" layoutY="77.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="228.0" style="-fx-background-color: #F0E68C;" text="Легенды спорта" />
+      <Button fx:id="btnMovieTheme" layoutX="303.0" layoutY="77.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="228.0" style="-fx-background-color: #D8BFD8;" text="Кино" />
+      <Button fx:id="answer1" layoutX="42.0" layoutY="213.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="228.0" style="-fx-background-color: #B0E0E6;" />
+      <Button fx:id="answer2" layoutX="303.0" layoutY="213.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="228.0" style="-fx-background-color: #B0E0E6;" />
+      <Button fx:id="answer3" layoutX="42.0" layoutY="306.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="228.0" style="-fx-background-color: #B0E0E6;" />
+      <Button fx:id="answer4" layoutX="303.0" layoutY="306.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="228.0" style="-fx-background-color: #B0E0E6;" />
+      <Label fx:id="questTheme" layoutX="42.0" layoutY="137.0" prefHeight="48.0" prefWidth="484.0" style="-fx-background-color: #FFDEAD;">
+         <font>
+            <Font name="Bauhaus 93" size="12.0" />
+         </font></Label>
 
    </children>
 </AnchorPane>

@@ -3,11 +3,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFFE0;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.MainController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.MainController">
    <children>
       <Button fx:id="btnTheme" layoutX="56.0" layoutY="94.0" mnemonicParsing="false" onAction="#getTheme" prefHeight="81.0" prefWidth="158.0" style="-fx-background-color: #98FB98;" text="Выбрать тему" />
       <Button fx:id="btnScore" layoutX="311.0" layoutY="94.0" mnemonicParsing="false" onAction="#getScore" prefHeight="81.0" prefWidth="158.0" style="-fx-background-color: #D8BFD8;" text="Посмотреть счет" />
-      <Button fx:id="btnExit" layoutX="311.0" layoutY="226.0" mnemonicParsing="false" onAction="#exitQuiz" prefHeight="81.0" prefWidth="158.0" style="-fx-background-color: #FFDAB9;" text="Выйти" />
+      <Button layoutX="311.0" layoutY="226.0" mnemonicParsing="false" onAction="#exitQuiz" prefHeight="81.0" prefWidth="158.0" style="-fx-background-color: #FFDAB9;" text="Выйти" />
       <Button fx:id="btnSimple" layoutX="56.0" layoutY="226.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="158.0" style="-fx-background-color: #AFEEEE;" text="Простая кнопка" />
       <Label fx:id="userMaxScore" layoutX="311.0" layoutY="62.0" prefHeight="24.0" prefWidth="113.0" visible="false" />
    </children>
