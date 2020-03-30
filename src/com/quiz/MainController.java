@@ -2,6 +2,7 @@ package com.quiz;
 
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -28,7 +29,7 @@ public class MainController{
     @FXML
     Button mainButton, registerButton, btnTheme, btnScore, btnSimple, btnSportTheme, btnMovieTheme, answer1, answer2, answer3, answer4;
     @FXML
-    Label labelNickname, userMaxScore, questTheme;
+    Label labelNickname, userMaxScore, questTheme, prompt;
 
 
     DBService dbService;
@@ -60,6 +61,9 @@ public class MainController{
                 stage.setScene(sc);
 
 
+            } else {
+                System.out.println("User not found");
+                prompt.setText("Пользователь не найден");
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
@@ -73,9 +77,44 @@ public class MainController{
         registerButton.setText("Сохранить");
         enterNickname.setVisible(true);
         labelNickname.setVisible(true);
-        promptArea.setText("Заполните данные для регистрации");
+        prompt.setText("Заполните данные для регистрации");
         mainButton.setVisible(false);
+        registerButton.setOnAction(new EventHandler<ActionEvent>() {
 
+            @Override
+            public void handle(ActionEvent event) {
+                createUser();
+            }
+
+
+        });
+
+    }
+
+    @FXML
+    //Регистрация;
+    void createUser() {
+        dbService = new DBService();
+        try {
+            String writeNickname = enterNickname.getText();
+            String writeLogin = enterLogin.getText();
+            String writePassword = enterPassword.getText();
+            if (dbService.loginExist(writeLogin)) {
+                //проверка на уникальность поля login в таблице users;
+                System.out.println("User exist");
+                prompt.setText("Пользователь существует");
+            } else {
+                dbService.write(writeNickname, writePassword, writeLogin);
+                prompt.setText("Вы успешно зарегистрированы!");
+                registerButton.setText("Регистрация");
+                labelNickname.setVisible(false);
+                enterNickname.setVisible(false);
+                mainButton.setVisible(true);
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+
+        }
     }
 
     @FXML
@@ -111,7 +150,7 @@ public class MainController{
     }
 
     @FXML
-    void setBtnMovieTheme (ActionEvent event) {
+    void setBtnMovieTheme () {
         dbService = new DBService();
      //вывод вопросов по выбранной теме
         try {
@@ -141,7 +180,7 @@ public class MainController{
     }
 
     @FXML
-    void setBtnSportTheme (ActionEvent event) {
+    void setBtnSportTheme () {
         dbService = new DBService();
         //вывод вопросов по выбранной теме
         try {

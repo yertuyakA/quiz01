@@ -18,7 +18,7 @@
    <Label layoutX="152.0" layoutY="125.0" text="Пароль" />
     <Label fx:id="labelNickname" layoutX="152.0" layoutY="180.0" text="Nickname" visible="false" />
    <Label layoutX="182.0" layoutY="34.0" text="Quiz-2020" />
-   <TextArea fx:id="promptArea" layoutX="150.0" layoutY="274.0" prefHeight="70.0" prefWidth="300.0" text="Введите данные для авторизации" />
+   <Label fx:id="prompt" layoutX="152.0" layoutY="285.0" prefHeight="41.0" prefWidth="300.0" text="Введите данные для авторизации" />
 
 
 </AnchorPane>
