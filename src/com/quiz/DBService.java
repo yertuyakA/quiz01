@@ -72,13 +72,21 @@ public class DBService {
 
 
 
-    public void getTheme() throws
+    public ResultSet getMovieTheme() throws
         SQLException {
-            PreparedStatement pstm = con.prepareStatement("select * from question_answers");
-            ResultSet rs = pstm.executeQuery();
-
+            PreparedStatement pstm = con.prepareStatement("select * from question_answers where theme_id = 1");
+            ResultSet qmt = pstm.executeQuery();
+            return qmt;
 
         }
+
+    public ResultSet getSportTheme() throws
+            SQLException {
+        PreparedStatement pstm = con.prepareStatement("select * from question_answers where theme_id = 2");
+        ResultSet qst = pstm.executeQuery();
+        return qst;
+
+    }
 
 }
 

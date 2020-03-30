@@ -12,7 +12,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainController{
 
@@ -77,7 +80,6 @@ public class MainController{
 
     @FXML
     void getScore() {
-        userMaxScore.setVisible(true);
         dbService = new DBService();
         //вывод счета пользователя из базы поле max_score;
         int maxScore = 0;
@@ -92,6 +94,12 @@ public class MainController{
     }
 
     @FXML
+    void exitQuiz() {
+        //выход из программы;
+        System.exit(1);
+    }
+
+    @FXML
     void getTheme(ActionEvent event) throws IOException {
      //выводить  окно выбора тем с вопросами;
             URL xmlUrl = getClass().getResource("theme.fxml");
@@ -103,8 +111,64 @@ public class MainController{
     }
 
     @FXML
-    void exitQuiz() {
-        //выход из программы;
-        System.exit(1);
+    void setBtnMovieTheme (ActionEvent event) {
+        dbService = new DBService();
+     //вывод вопросов по выбранной теме
+        try {
+            ResultSet mq = dbService.getMovieTheme();
+            List<MovieTheme> movieTheme = new ArrayList<>();
+            while (mq.next()){
+                Theme movieQuestion = new MovieTheme();
+                movieQuestion.setId(mq.getInt(1));
+                movieQuestion.setThemeId(mq.getInt(2));
+                movieQuestion.setQuestion(mq.getString(3));
+                movieQuestion.setAnswer(mq.getString(4));
+                movieQuestion.setWrongAnswer1(mq.getString(5));
+                movieQuestion.setWrongAnswer2(mq.getString(6));
+                movieQuestion.setWrongAnswer3(mq.getString(7));
+                movieQuestion.setPoint(mq.getInt(8));
+
+                movieTheme.add((MovieTheme) movieQuestion);
+
+            }
+            System.out.println(movieTheme);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
     }
+
+    @FXML
+    void setBtnSportTheme (ActionEvent event) {
+        dbService = new DBService();
+        //вывод вопросов по выбранной теме
+        try {
+            ResultSet sq = dbService.getSportTheme();
+            List<SportLegendTheme> sportLegendTheme = new ArrayList<>();
+            while (sq.next()){
+                Theme sportQuestion = new SportLegendTheme();
+                sportQuestion.setId(sq.getInt(1));
+                sportQuestion.setThemeId(sq.getInt(2));
+                sportQuestion.setQuestion(sq.getString(3));
+                sportQuestion.setAnswer(sq.getString(4));
+                sportQuestion.setWrongAnswer1(sq.getString(5));
+                sportQuestion.setWrongAnswer2(sq.getString(6));
+                sportQuestion.setWrongAnswer3(sq.getString(7));
+                sportQuestion.setPoint(sq.getInt(8));
+
+                sportLegendTheme.add((SportLegendTheme) sportQuestion);
+
+            }
+            System.out.println(sportLegendTheme);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+
+    }
+
 }
