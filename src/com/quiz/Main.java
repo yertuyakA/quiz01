@@ -17,15 +17,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-
-//        MainService mainService = new MainService();
-//        try {
-//            mainService.run();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-
-
     }
 
     @Override
@@ -40,6 +31,12 @@ public class Main extends Application {
 
     }
 
+//        MainService mainService = new MainService();- используется для вывода на консоль проекта(вместа launch(args))
+//        try {
+//            mainService.run();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
 
     
 }

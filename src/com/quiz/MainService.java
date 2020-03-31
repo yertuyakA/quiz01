@@ -9,56 +9,6 @@ public class MainService {
     DBService dBService;
     MainController mainController;
 
-// для консоли
-    public void run() throws SQLException {
-        dBService = new DBService();
-        // здесь будет наша логика
-        mainController = new MainController();
-        login();
-        createUser();
-    }
-
-/*авторизация с консоли
-        //авторизация в консоли;
-        public void login() throws SQLException {
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Введите логин");
-            String login = sc.nextLine();
-            System.out.println("Введите пароль");
-            String password = sc.nextLine();
-            if (dBService.isRegistered(login, password)) {
-                System.out.println("Вы вошли в систему");
-            } else {
-                System.out.println("Не хотите зарегистрироваться?");
-                if (sc.nextLine().equals("да")) {
-                    createUser();
-                } else {
-                    System.out.println("Для повторного входа введите любой символ");
-                    if(!sc.nextLine().equals("")){
-                        login();
-                }
-            }
-        }
-  }
-
-    //регистрация в консоли;
-    public void createUser() throws SQLException {
-        System.out.println("Nickname:");
-        Scanner in = new Scanner(System.in);
-        String writeNickname = in.nextLine();
-        System.out.println("Логин:");
-        String writeLogin = in.nextLine();
-        System.out.println("Пароль:");
-        String writePassword = in.nextLine();
-        if(dBService.loginExist(writeLogin)) {
-            //проверка на уникальность поля login в таблице users
-        } else {
-            dBService.write(writeNickname, writePassword, writeLogin);
-            System.out.println("Вы успешно зарегистрированы!");
-            login();
-        }
-    }
-    */
 
     //Авторизация;
      public void login() throws SQLException {
@@ -82,12 +32,12 @@ public class MainService {
     }
 
     //Регистрация;
-    public void createUser() throws SQLException {
+    /*public void createUser() throws SQLException {
         String writeNickname = mainController.enterNickname.getText();
         String writeLogin = mainController.enterLogin.getText();
         String writePassword = mainController.enterPassword.getText();
-        if(dBService.loginExist(writeLogin)) {
-            //проверка на уникальность поля login в таблице users;
+        if(dBService.loginExist()) {
+            //Проверка на уникальность поля login в таблице users;
         } else {
             dBService.write(writeNickname, writePassword, writeLogin);
             mainController.promptArea.setText("Вы успешно зарегистрированы!");
@@ -96,7 +46,59 @@ public class MainService {
             mainController.enterNickname.setVisible(false);
             mainController.mainButton.setVisible(true);
         }
+    }*/
+
+    // для консоли
+    /*public void run() throws SQLException {
+        dBService = new DBService();
+        // здесь будет наша логика
+        mainController = new MainController();
+        login();
+        createUser();
+    }*/
+
+/*Авторизация с консоли
+        //авторизация в консоли;
+        public void login() throws SQLException {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Введите логин");
+            String login = sc.nextLine();
+            System.out.println("Введите пароль");
+            String password = sc.nextLine();
+            if (dBService.isRegistered(login, password)) {
+                System.out.println("Вы вошли в систему");
+            } else {
+                System.out.println("Не хотите зарегистрироваться?");
+                if (sc.nextLine().equals("да")) {
+                    createUser();
+                } else {
+                    System.out.println("Для повторного входа введите любой символ");
+                    if(!sc.nextLine().equals("")){
+                        login();
+                }
+            }
+        }
+  }
+
+    //Регистрация в консоли;
+    public void createUser() throws SQLException {
+        System.out.println("Nickname:");
+        Scanner in = new Scanner(System.in);
+        String writeNickname = in.nextLine();
+        System.out.println("Логин:");
+        String writeLogin = in.nextLine();
+        System.out.println("Пароль:");
+        String writePassword = in.nextLine();
+        if(dBService.loginExist(writeLogin)) {
+            //проверка на уникальность поля login в таблице users
+        } else {
+            dBService.write(writeNickname, writePassword, writeLogin);
+            System.out.println("Вы успешно зарегистрированы!");
+            login();
+        }
     }
+    */
+
 
 
 }

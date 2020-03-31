@@ -6,6 +6,9 @@ public class DBService {
     Connection con;
     Statement stmt;
     MainController mainController;
+
+
+
     public DBService() {
         mainController = new MainController();
         try {
@@ -16,44 +19,51 @@ public class DBService {
             System.out.println(e);
         }
     }
-    public boolean isRegistered(String login, String password) throws
-        SQLException {
+    public boolean isRegistered(String login,String password) throws SQLException {
             PreparedStatement pstm = con.prepareStatement("select * from users where login = ? and password = ?");
             pstm.setString(1, login);
             pstm.setString(2, password);
             ResultSet rs = pstm.executeQuery();
             if(!rs.next()){
-                mainController.promptArea.setText("Пользователь не найден");
+                return false;
             }else{
                 return true;
             }
 
-            return false;
-
         }
 
-    public boolean loginExist(String writeLogin) throws SQLException {
+    public boolean loginExist(String login) throws SQLException {
         PreparedStatement pstm = con.prepareStatement("select * from users where login = ?");
-        pstm.setString(1, writeLogin);
+        pstm.setString(1, login);
         ResultSet log = pstm.executeQuery();
         if(log.next()) {
-            mainController.promptArea.setText("Логин уже существует.");
+            return true;
         } else {
             return false;
         }
-        return true;
     }
 
 
     public void write(String writeNickname, String writePassword, String writeLogin) throws
         SQLException {
-           PreparedStatement pstm = con.prepareStatement ("INSERT INTO users (nickname, password, login) values(?, ?, ?)");
-            pstm.setString(1, writeNickname);
-            pstm.setString(2, writePassword);
-            pstm.setString(3, writeLogin);
-            pstm.execute();
-        }
+        PreparedStatement pstm = con.prepareStatement("INSERT INTO users (nickname, password, login) values(?, ?, ?)");
+        pstm.setString(1, writeNickname);
+        pstm.setString(2, writePassword);
+        pstm.setString(3, writeLogin);
+        pstm.execute();
 
+    }
+    public int getScore(String activelogin) throws SQLException{
+        PreparedStatement pstm = con.prepareStatement("select max_score from users where login = ?");
+        pstm.setString(1,activelogin);
+        ResultSet rst = pstm.executeQuery();
+        int score = 0;
+        if(rst.next()){
+            score = rst.getInt(1);
+        }
+        System.out.println(score);
+        return score;
+    }
 
 }
 
