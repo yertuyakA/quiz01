@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 
+import static java.lang.String.valueOf;
+
 public class MainController{
 
     @FXML
@@ -29,13 +31,17 @@ public class MainController{
     Button mainButton, registerButton,scr;
 
     @FXML
-    Label labelNickname,labelLogin,labelPassword,maxscore;
+    Label labelNickname,labelLogin,labelPassword,labelScore;
 
 
 
 
     DBService dbService;
     static String  activeLogin;
+    String writeNickname;
+    String writePassword;
+    String writeLogin;
+    String login;
 
 
 
@@ -51,6 +57,7 @@ public class MainController{
               activeLogin = enterLogin.getText().toString();
 
 
+
                 URL xmlUrl = getClass().getResource("menu.fxml");
                 Parent root = FXMLLoader.load(xmlUrl);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -64,32 +71,44 @@ public class MainController{
     }
 
     @FXML
-    void registration() throws SQLException {
-        registerButton.setText("Сохранить");
-        enterNickname.setVisible(true);
-        labelNickname.setVisible(true);
-        //  mainService.createUser();
-        mainButton.setVisible(false);
+    void registration(ActionEvent event) throws IOException {
+         dbService = new DBService();
+
+
+        try {
+
+            dbService.create( writeNickname,  writePassword,  writeLogin);
+            // dbService.loginExist(login);
+
+            registerButton.setText("Сохранить");
+            enterNickname.setVisible(true);
+            labelNickname.setVisible(true);
+            mainButton.setVisible(false);
+
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
 
     }
     @FXML
-    void score(ActionEvent event){
-        DBService dbService = new DBService();
+    void score(ActionEvent event) throws IOException {
+         dbService = new DBService();
         int maxScore = 0;
 
-        try{
-            dbService.getScore(activeLogin);
 
-            URL xmlUrl = getClass().getResource("score.fxml");
-            Parent root = FXMLLoader.load(xmlUrl);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene sc = new Scene(root);
-            maxscore.setText(String.valueOf(maxScore));
-            stage.setScene(sc);
+        try{
+            maxScore = dbService.getScore(activeLogin) ;
+
+
+            scr.setVisible(false);
+            labelScore.setVisible(true);
+            labelScore.setText(String.valueOf(maxScore));
+            System.out.println(maxScore);
 
 
         }
-        catch (SQLException | IOException e){
+        catch (SQLException e ){
             e.printStackTrace();
         }
 

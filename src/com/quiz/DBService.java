@@ -44,8 +44,7 @@ public class DBService {
     }
 
 
-    public void write(String writeNickname, String writePassword, String writeLogin) throws
-        SQLException {
+    public void create(String writeNickname, String writePassword, String writeLogin) throws SQLException {
         PreparedStatement pstm = con.prepareStatement("INSERT INTO users (nickname, password, login) values(?, ?, ?)");
         pstm.setString(1, writeNickname);
         pstm.setString(2, writePassword);
@@ -61,7 +60,7 @@ public class DBService {
         if(rst.next()){
             score = rst.getInt(1);
         }
-        System.out.println(score);
+        //System.out.println(score);
         return score;
     }
 

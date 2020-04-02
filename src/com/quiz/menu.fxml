@@ -7,7 +7,8 @@
    <children>
       <Button layoutX="53.0" layoutY="220.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="161.0" text="Button" />
       <Button layoutX="53.0" layoutY="37.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="161.0" text="Themes" />
-      <Button fx:id="scr" layoutX="377.0" layoutY="37.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="161.0" text="Score" onAction="#score" />
+      <Button fx:id="scr" layoutX="235.0" layoutY="80.0" mnemonicParsing="false" onAction="#score" prefHeight="113.0" prefWidth="161.0" text="Score" />
       <Button layoutX="377.0" layoutY="220.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="161.0" text="Exit" />
+      <Label fx:id="labelScore" layoutX="415.0" layoutY="70.0" prefHeight="48.0" prefWidth="86.0" text="MaxScore" visible="false" />
    </children>
 </AnchorPane>
