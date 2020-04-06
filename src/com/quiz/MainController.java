@@ -35,6 +35,9 @@ public class MainController{
     DBService dbService;
     private static String activeLogin;
     private static String rightAnswer;
+    private static boolean isRight = false;
+    private static int questionScore;
+    private static int totalScore;
 
     void setActiveLogin(String activeLogin) {
         this.activeLogin = activeLogin;
@@ -51,6 +54,22 @@ public class MainController{
     String getRightAnswer() {
         return rightAnswer;
     }
+
+    int getQuestionScore() {
+        return questionScore;
+    }
+    public void setQuestionScore() {
+        this.questionScore = questionScore;
+    }
+
+    int getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore() {
+        this.totalScore = totalScore;
+    }
+
 
     @FXML
     void click(ActionEvent event) {
@@ -164,6 +183,8 @@ public class MainController{
         btnSportTheme.setVisible(false);
         btnMovieTheme.setVisible(false);
         labelTheme.setText("Выберите вариант ответа");
+        questionScore =0;
+        totalScore = 0;
      //вывод вопросов по выбранной теме
         try {
             List<MovieTheme> movieTheme = dbService.getMovieTheme(1);
@@ -175,6 +196,7 @@ public class MainController{
 
             questTheme.setText(movieQuestion.getQuestion());
             rightAnswer = movieQuestion.getAnswer(); //записываем правильный ответ;
+            questionScore = movieQuestion.getPoint(); //записываем балл ответа;
             System.out.println(rightAnswer);
             List<String> answers = new ArrayList<>();
             answers.add(movieQuestion.getAnswer());
@@ -226,6 +248,7 @@ public class MainController{
     void clickAnswer1() {
          if(answer1.getText().equals(rightAnswer)) {
              answer1.setStyle("-fx-background-color: #9ACD32;");
+             isRight = true;
          } else {
              answer1.setStyle("-fx-background-color: #FA8072;");
          }
@@ -240,6 +263,7 @@ public class MainController{
     void clickAnswer2() {
         if(answer2.getText().equals(rightAnswer)) {
             answer2.setStyle("-fx-background-color: #9ACD32;");
+            isRight = true;
         } else {
             answer2.setStyle("-fx-background-color: #FA8072;");
         }
@@ -255,6 +279,7 @@ public class MainController{
     void clickAnswer3() {
         if(answer3.getText().equals(rightAnswer)) {
             answer3.setStyle("-fx-background-color: #9ACD32;");
+            isRight = true;
         } else {
             answer3.setStyle("-fx-background-color: #FA8072;");
         }
@@ -269,6 +294,7 @@ public class MainController{
     void clickAnswer4() {
         if(answer4.getText().equals(rightAnswer)) {
             answer4.setStyle("-fx-background-color: #9ACD32;");
+            isRight = true;
         } else {
             answer4.setStyle("-fx-background-color: #FA8072;");
         }
@@ -281,7 +307,13 @@ public class MainController{
 
     @FXML
     void clickNext() {
+        if(isRight=true) {
+            totalScore = questionScore++;
+            System.out.println(totalScore);
 
+        } else {
+            System.out.println(totalScore);
+        }
 
     }
 
