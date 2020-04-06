@@ -27,13 +27,14 @@ public class MainController{
     @FXML
     PasswordField enterPassword;
     @FXML
-    Button mainButton, registerButton, btnTheme, btnScore, btnSimple, btnSportTheme, btnMovieTheme, answer1, answer2, answer3, answer4;
+    Button mainButton, registerButton, btnTheme, btnScore, btnSimple, btnSportTheme, btnMovieTheme, btnNext, answer1, answer2, answer3, answer4;
     @FXML
     Label labelNickname, userMaxScore, questTheme, prompt, labelTheme;
 
 
     DBService dbService;
     private static String activeLogin;
+    private static String rightAnswer;
 
     void setActiveLogin(String activeLogin) {
         this.activeLogin = activeLogin;
@@ -41,6 +42,14 @@ public class MainController{
 
     String getActiveLogin() {
         return activeLogin;
+    }
+
+    void setRightAnswer() {
+        this.rightAnswer = rightAnswer;
+    }
+
+    String getRightAnswer() {
+        return rightAnswer;
     }
 
     @FXML
@@ -165,6 +174,8 @@ public class MainController{
             System.out.println(questionId);
 
             questTheme.setText(movieQuestion.getQuestion());
+            rightAnswer = movieQuestion.getAnswer(); //записываем правильный ответ;
+            System.out.println(rightAnswer);
             List<String> answers = new ArrayList<>();
             answers.add(movieQuestion.getAnswer());
             answers.add(movieQuestion.getWrongAnswer1());
@@ -187,8 +198,9 @@ public class MainController{
             e.printStackTrace();
 
         }
-
     }
+
+
 
     @FXML
     void setBtnSportTheme () {
@@ -206,6 +218,69 @@ public class MainController{
             e.printStackTrace();
 
         }
+
+
+    }
+//выбор ответов:
+    @FXML
+    void clickAnswer1() {
+         if(answer1.getText().equals(rightAnswer)) {
+             answer1.setStyle("-fx-background-color: #9ACD32;");
+         } else {
+             answer1.setStyle("-fx-background-color: #FA8072;");
+         }
+         answer1.setDisable(true);
+         answer2.setDisable(true);
+         answer3.setDisable(true);
+         answer4.setDisable(true);
+
+    }
+
+    @FXML
+    void clickAnswer2() {
+        if(answer2.getText().equals(rightAnswer)) {
+            answer2.setStyle("-fx-background-color: #9ACD32;");
+        } else {
+            answer2.setStyle("-fx-background-color: #FA8072;");
+        }
+        answer1.setDisable(true);
+        answer2.setDisable(true);
+        answer3.setDisable(true);
+        answer4.setDisable(true);
+
+    }
+
+
+    @FXML
+    void clickAnswer3() {
+        if(answer3.getText().equals(rightAnswer)) {
+            answer3.setStyle("-fx-background-color: #9ACD32;");
+        } else {
+            answer3.setStyle("-fx-background-color: #FA8072;");
+        }
+        answer1.setDisable(true);
+        answer2.setDisable(true);
+        answer3.setDisable(true);
+        answer4.setDisable(true);
+
+    }
+
+    @FXML
+    void clickAnswer4() {
+        if(answer4.getText().equals(rightAnswer)) {
+            answer4.setStyle("-fx-background-color: #9ACD32;");
+        } else {
+            answer4.setStyle("-fx-background-color: #FA8072;");
+        }
+        answer1.setDisable(true);
+        answer2.setDisable(true);
+        answer3.setDisable(true);
+        answer4.setDisable(true);
+
+    }
+
+    @FXML
+    void clickNext() {
 
 
     }
