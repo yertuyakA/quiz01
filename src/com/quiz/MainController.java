@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainController{
@@ -27,7 +29,7 @@ public class MainController{
     @FXML
     Button mainButton, registerButton, btnTheme, btnScore, btnSimple, btnSportTheme, btnMovieTheme, answer1, answer2, answer3, answer4;
     @FXML
-    Label labelNickname, userMaxScore, questTheme, prompt;
+    Label labelNickname, userMaxScore, questTheme, prompt, labelTheme;
 
 
     DBService dbService;
@@ -150,11 +152,36 @@ public class MainController{
     @FXML
     void setBtnMovieTheme () {
         dbService = new DBService();
+        btnSportTheme.setVisible(false);
+        btnMovieTheme.setVisible(false);
+        labelTheme.setText("Выберите вариант ответа");
      //вывод вопросов по выбранной теме
         try {
-
             List<MovieTheme> movieTheme = dbService.getMovieTheme(1);
             System.out.println(movieTheme);
+            Collections.shuffle(movieTheme);
+            Theme movieQuestion = movieTheme.get(0);
+            int questionId = movieQuestion.getId();
+            System.out.println(questionId);
+
+            questTheme.setText(movieQuestion.getQuestion());
+            List<String> answers = new ArrayList<>();
+            answers.add(movieQuestion.getAnswer());
+            answers.add(movieQuestion.getWrongAnswer1());
+            answers.add(movieQuestion.getWrongAnswer2());
+            answers.add(movieQuestion.getWrongAnswer3());
+            Collections.shuffle(answers);
+
+            answer1.setText(answers.get(0));
+            answer2.setText(answers.get(1));
+            answer3.setText(answers.get(2));
+            answer4.setText(answers.get(3));
+    //        for (i=0; i++) {
+
+      //      }
+
+
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -166,10 +193,14 @@ public class MainController{
     @FXML
     void setBtnSportTheme () {
         dbService = new DBService();
+        btnMovieTheme.setVisible(false);
+        btnSportTheme.setVisible(false);
+        labelTheme.setText("Выберите вариант ответа");
         //вывод вопросов по выбранной теме
         try {
             List<SportLegendTheme> sportLegendTheme = dbService.getSportTheme(2);
             System.out.println(sportLegendTheme);
+            Collections.shuffle(sportLegendTheme);
 
         } catch (SQLException e) {
             e.printStackTrace();
