@@ -70,7 +70,6 @@ public class MainController{
         this.totalScore = totalScore;
     }
 
-
     @FXML
     void click(ActionEvent event) {
         //запуск авторизации при нажатии кнопки Log in;
@@ -179,13 +178,12 @@ public class MainController{
 
     @FXML
     void setBtnMovieTheme () {
-        dbService = new DBService();
         btnSportTheme.setVisible(false);
         btnMovieTheme.setVisible(false);
         labelTheme.setText("Выберите вариант ответа");
+        dbService = new DBService();
         questionScore =0;
         totalScore = 0;
-     //вывод вопросов по выбранной теме
         try {
             List<MovieTheme> movieTheme = dbService.getMovieTheme(1);
             System.out.println(movieTheme);
@@ -193,6 +191,19 @@ public class MainController{
             Theme movieQuestion = movieTheme.get(0);
             int questionId = movieQuestion.getId();
             System.out.println(questionId);
+            getQuestions();    //вывод вопросов по выбранной теме;
+
+        } catch (SQLException e){
+            e.printStackTrace();
+
+
+    }
+
+//вывод вопроса на экран;
+    public void getQuestions() {
+
+        for (int i = 0; i > 0; i++) {
+
 
             questTheme.setText(movieQuestion.getQuestion());
             rightAnswer = movieQuestion.getAnswer(); //записываем правильный ответ;
@@ -209,19 +220,8 @@ public class MainController{
             answer2.setText(answers.get(1));
             answer3.setText(answers.get(2));
             answer4.setText(answers.get(3));
-    //        for (i=0; i++) {
-
-      //      }
-
-
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
         }
     }
-
 
 
     @FXML
@@ -311,9 +311,11 @@ public class MainController{
             totalScore = questionScore++;
             System.out.println(totalScore);
 
+
         } else {
             System.out.println(totalScore);
         }
+
 
     }
 
