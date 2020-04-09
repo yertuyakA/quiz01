@@ -320,6 +320,11 @@ public class MainController {
 
         @FXML
         void clickNext() {
+            answer1.setDisable(false);
+            answer2.setDisable(false);
+            answer3.setDisable(false);
+            answer4.setDisable(false);
+
             if (isRight = true) {
                 totalScore = questionScore++;
                 System.out.println(totalScore);
