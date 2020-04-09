@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MainController{
+public class MainController {
 
     @FXML
     TextField enterLogin, enterNickname;
@@ -58,6 +58,7 @@ public class MainController{
     int getQuestionScore() {
         return questionScore;
     }
+
     public void setQuestionScore() {
         this.questionScore = questionScore;
     }
@@ -76,10 +77,10 @@ public class MainController{
         dbService = new DBService();
 
         try {
-            if(dbService.isRegistered(enterLogin.getText().toString(), enterPassword.getText().toString())){
+            if (dbService.isRegistered(enterLogin.getText().toString(), enterPassword.getText().toString())) {
                 System.out.println("TRUE!!!");
                 activeLogin = enterLogin.getText().toString();
-                System.out.println(activeLogin+" authorized");
+                System.out.println(activeLogin + " authorized");
 
                 URL xmlUrl = getClass().getResource("menu.fxml");
                 Parent root = FXMLLoader.load(xmlUrl);
@@ -119,7 +120,7 @@ public class MainController{
     }
 
     @FXML
-    //Регистрация;
+        //Регистрация;
     void createUser() {
         dbService = new DBService();
         try {
@@ -139,7 +140,7 @@ public class MainController{
                 mainButton.setVisible(true);
             }
         } catch (SQLException e) {
-        e.printStackTrace();
+            e.printStackTrace();
 
         }
     }
@@ -151,7 +152,7 @@ public class MainController{
         int maxScore = 0;
         try {
             maxScore = dbService.getMaxScore(activeLogin);
-            userMaxScore.setText("Счет: "+String.valueOf(maxScore));
+            userMaxScore.setText("Счет: " + String.valueOf(maxScore));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -167,22 +168,22 @@ public class MainController{
 
     @FXML
     void getTheme(ActionEvent event) throws IOException {
-     //выводить  окно выбора тем с вопросами;
-            URL xmlUrl = getClass().getResource("theme.fxml");
-            Parent root = FXMLLoader.load(xmlUrl);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene sc = new Scene(root);
-            stage.setScene(sc);
+        //выводить  окно выбора тем с вопросами;
+        URL xmlUrl = getClass().getResource("theme.fxml");
+        Parent root = FXMLLoader.load(xmlUrl);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene sc = new Scene(root);
+        stage.setScene(sc);
 
     }
 
     @FXML
-    void setBtnMovieTheme () {
+    void setBtnMovieTheme() {
         btnSportTheme.setVisible(false);
         btnMovieTheme.setVisible(false);
         labelTheme.setText("Выберите вариант ответа");
         dbService = new DBService();
-        questionScore =0;
+        questionScore = 0;
         totalScore = 0;
         try {
             List<MovieTheme> movieTheme = dbService.getMovieTheme(1);
@@ -191,20 +192,6 @@ public class MainController{
             Theme movieQuestion = movieTheme.get(0);
             int questionId = movieQuestion.getId();
             System.out.println(questionId);
-            getQuestions();    //вывод вопросов по выбранной теме;
-
-        } catch (SQLException e){
-            e.printStackTrace();
-
-
-    }
-
-//вывод вопроса на экран;
-    public void getQuestions() {
-
-        for (int i = 0; i > 0; i++) {
-
-
             questTheme.setText(movieQuestion.getQuestion());
             rightAnswer = movieQuestion.getAnswer(); //записываем правильный ответ;
             questionScore = movieQuestion.getPoint(); //записываем балл ответа;
@@ -220,103 +207,127 @@ public class MainController{
             answer2.setText(answers.get(1));
             answer3.setText(answers.get(2));
             answer4.setText(answers.get(3));
-        }
-    }
-
-
-    @FXML
-    void setBtnSportTheme () {
-        dbService = new DBService();
-        btnMovieTheme.setVisible(false);
-        btnSportTheme.setVisible(false);
-        labelTheme.setText("Выберите вариант ответа");
-        //вывод вопросов по выбранной теме
-        try {
-            List<SportLegendTheme> sportLegendTheme = dbService.getSportTheme(2);
-            System.out.println(sportLegendTheme);
-            Collections.shuffle(sportLegendTheme);
 
         } catch (SQLException e) {
             e.printStackTrace();
 
+
+        }
+    }
+
+
+    @FXML
+    void setBtnSportTheme() {
+        btnMovieTheme.setVisible(false);
+        btnSportTheme.setVisible(false);
+        labelTheme.setText("Выберите вариант ответа");
+        dbService = new DBService();
+        questionScore = 0;
+        totalScore = 0;
+        //вывод вопросов по выбранной теме
+        try {
+             List<SportLegendTheme> sportLegendTheme = dbService.getSportTheme(2);
+             System.out.println(sportLegendTheme);
+             Collections.shuffle(sportLegendTheme);
+             Theme sportQuestion = sportLegendTheme.get(0);
+             int questionId = sportQuestion.getId();
+             System.out.println(questionId);
+             questTheme.setText(sportQuestion.getQuestion());
+             rightAnswer = sportQuestion.getAnswer(); //записываем правильный ответ;
+             questionScore = sportQuestion.getPoint(); //записываем балл ответа;
+             System.out.println(rightAnswer);
+             List<String> answers = new ArrayList<>();
+             answers.add(sportQuestion.getAnswer());
+             answers.add(sportQuestion.getWrongAnswer1());
+             answers.add(sportQuestion.getWrongAnswer2());
+             answers.add(sportQuestion.getWrongAnswer3());
+             Collections.shuffle(answers);
+
+             answer1.setText(answers.get(0));
+             answer2.setText(answers.get(1));
+             answer3.setText(answers.get(2));
+             answer4.setText(answers.get(3));
+
+        } catch (SQLException e) {
+                e.printStackTrace();
+
         }
 
 
     }
+
 //выбор ответов:
-    @FXML
-    void clickAnswer1() {
-         if(answer1.getText().equals(rightAnswer)) {
-             answer1.setStyle("-fx-background-color: #9ACD32;");
-             isRight = true;
-         } else {
-             answer1.setStyle("-fx-background-color: #FA8072;");
-         }
-         answer1.setDisable(true);
-         answer2.setDisable(true);
-         answer3.setDisable(true);
-         answer4.setDisable(true);
+        @FXML
+        void clickAnswer1 () {
+            if (answer1.getText().equals(rightAnswer)) {
+                answer1.setStyle("-fx-background-color: #9ACD32;");
+                isRight = true;
+            } else {
+                answer1.setStyle("-fx-background-color: #FA8072;");
+            }
+            answer1.setDisable(true);
+            answer2.setDisable(true);
+            answer3.setDisable(true);
+            answer4.setDisable(true);
 
-    }
-
-    @FXML
-    void clickAnswer2() {
-        if(answer2.getText().equals(rightAnswer)) {
-            answer2.setStyle("-fx-background-color: #9ACD32;");
-            isRight = true;
-        } else {
-            answer2.setStyle("-fx-background-color: #FA8072;");
         }
-        answer1.setDisable(true);
-        answer2.setDisable(true);
-        answer3.setDisable(true);
-        answer4.setDisable(true);
 
-    }
+        @FXML
+        void clickAnswer2 () {
+            if (answer2.getText().equals(rightAnswer)) {
+                answer2.setStyle("-fx-background-color: #9ACD32;");
+                isRight = true;
+            } else {
+                answer2.setStyle("-fx-background-color: #FA8072;");
+            }
+            answer1.setDisable(true);
+            answer2.setDisable(true);
+            answer3.setDisable(true);
+            answer4.setDisable(true);
 
-
-    @FXML
-    void clickAnswer3() {
-        if(answer3.getText().equals(rightAnswer)) {
-            answer3.setStyle("-fx-background-color: #9ACD32;");
-            isRight = true;
-        } else {
-            answer3.setStyle("-fx-background-color: #FA8072;");
-        }
-        answer1.setDisable(true);
-        answer2.setDisable(true);
-        answer3.setDisable(true);
-        answer4.setDisable(true);
-
-    }
-
-    @FXML
-    void clickAnswer4() {
-        if(answer4.getText().equals(rightAnswer)) {
-            answer4.setStyle("-fx-background-color: #9ACD32;");
-            isRight = true;
-        } else {
-            answer4.setStyle("-fx-background-color: #FA8072;");
-        }
-        answer1.setDisable(true);
-        answer2.setDisable(true);
-        answer3.setDisable(true);
-        answer4.setDisable(true);
-
-    }
-
-    @FXML
-    void clickNext() {
-        if(isRight=true) {
-            totalScore = questionScore++;
-            System.out.println(totalScore);
-
-
-        } else {
-            System.out.println(totalScore);
         }
 
 
-    }
+        @FXML
+        void clickAnswer3 () {
+            if (answer3.getText().equals(rightAnswer)) {
+                answer3.setStyle("-fx-background-color: #9ACD32;");
+                isRight = true;
+            } else {
+                answer3.setStyle("-fx-background-color: #FA8072;");
+            }
+            answer1.setDisable(true);
+            answer2.setDisable(true);
+            answer3.setDisable(true);
+            answer4.setDisable(true);
+
+        }
+
+        @FXML
+        void clickAnswer4 () {
+            if (answer4.getText().equals(rightAnswer)) {
+                answer4.setStyle("-fx-background-color: #9ACD32;");
+                isRight = true;
+            } else {
+                answer4.setStyle("-fx-background-color: #FA8072;");
+            }
+            answer1.setDisable(true);
+            answer2.setDisable(true);
+            answer3.setDisable(true);
+            answer4.setDisable(true);
+
+        }
+
+        @FXML
+        void clickNext() {
+            if (isRight = true) {
+                totalScore = questionScore++;
+                System.out.println(totalScore);
+
+
+            } else {
+                System.out.println(totalScore);
+            }
+        }
 
 }
