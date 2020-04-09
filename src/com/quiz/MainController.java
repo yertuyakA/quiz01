@@ -36,8 +36,11 @@ public class MainController {
     private static String activeLogin;
     private static String rightAnswer;
     private static boolean isRight = false;
+    private static boolean isMovieTheme = false;
+    private static boolean isSportTheme = false;
     private static int questionScore;
     private static int totalScore;
+    private static int qIndex;
 
     void setActiveLogin(String activeLogin) {
         this.activeLogin = activeLogin;
@@ -182,14 +185,22 @@ public class MainController {
         btnSportTheme.setVisible(false);
         btnMovieTheme.setVisible(false);
         labelTheme.setText("Выберите вариант ответа");
+        isMovieTheme = true;
+        getMovieQuestion();
+        qIndex = 0;
+
+    }
+
+    public void getMovieQuestion() {
         dbService = new DBService();
         questionScore = 0;
         totalScore = 0;
+
         try {
             List<MovieTheme> movieTheme = dbService.getMovieTheme(1);
             System.out.println(movieTheme);
             Collections.shuffle(movieTheme);
-            Theme movieQuestion = movieTheme.get(0);
+            Theme movieQuestion = movieTheme.get(qIndex);
             int questionId = movieQuestion.getId();
             System.out.println(questionId);
             questTheme.setText(movieQuestion.getQuestion());
@@ -221,39 +232,45 @@ public class MainController {
         btnMovieTheme.setVisible(false);
         btnSportTheme.setVisible(false);
         labelTheme.setText("Выберите вариант ответа");
+        isSportTheme=true;
+        getSportQuestion();
+        qIndex = 0;
+
+
+    }
+
+    public void getSportQuestion() {
         dbService = new DBService();
         questionScore = 0;
         totalScore = 0;
         //вывод вопросов по выбранной теме
         try {
-             List<SportLegendTheme> sportLegendTheme = dbService.getSportTheme(2);
-             System.out.println(sportLegendTheme);
-             Collections.shuffle(sportLegendTheme);
-             Theme sportQuestion = sportLegendTheme.get(0);
-             int questionId = sportQuestion.getId();
-             System.out.println(questionId);
-             questTheme.setText(sportQuestion.getQuestion());
-             rightAnswer = sportQuestion.getAnswer(); //записываем правильный ответ;
-             questionScore = sportQuestion.getPoint(); //записываем балл ответа;
-             System.out.println(rightAnswer);
-             List<String> answers = new ArrayList<>();
-             answers.add(sportQuestion.getAnswer());
-             answers.add(sportQuestion.getWrongAnswer1());
-             answers.add(sportQuestion.getWrongAnswer2());
-             answers.add(sportQuestion.getWrongAnswer3());
-             Collections.shuffle(answers);
+            List<SportLegendTheme> sportLegendTheme = dbService.getSportTheme(2);
+            System.out.println(sportLegendTheme);
+            Collections.shuffle(sportLegendTheme);
+            Theme sportQuestion = sportLegendTheme.get(qIndex);
+            int questionId = sportQuestion.getId();
+            System.out.println(questionId);
+            questTheme.setText(sportQuestion.getQuestion());
+            rightAnswer = sportQuestion.getAnswer(); //записываем правильный ответ;
+            questionScore = sportQuestion.getPoint(); //записываем балл ответа;
+            System.out.println(rightAnswer);
+            List<String> answers = new ArrayList<>();
+            answers.add(sportQuestion.getAnswer());
+            answers.add(sportQuestion.getWrongAnswer1());
+            answers.add(sportQuestion.getWrongAnswer2());
+            answers.add(sportQuestion.getWrongAnswer3());
+            Collections.shuffle(answers);
 
-             answer1.setText(answers.get(0));
-             answer2.setText(answers.get(1));
-             answer3.setText(answers.get(2));
-             answer4.setText(answers.get(3));
+            answer1.setText(answers.get(0));
+            answer2.setText(answers.get(1));
+            answer3.setText(answers.get(2));
+            answer4.setText(answers.get(3));
 
         } catch (SQLException e) {
-                e.printStackTrace();
+            e.printStackTrace();
 
         }
-
-
     }
 
 //выбор ответов:
@@ -324,6 +341,11 @@ public class MainController {
             answer2.setDisable(false);
             answer3.setDisable(false);
             answer4.setDisable(false);
+            answer1.setStyle("-fx-background-color: #B0E0E6;");
+            answer2.setStyle("-fx-background-color: #B0E0E6;");
+            answer3.setStyle("-fx-background-color: #B0E0E6;");
+            answer4.setStyle("-fx-background-color: #B0E0E6;");
+            qIndex++;
 
             if (isRight = true) {
                 totalScore = questionScore++;
@@ -333,6 +355,17 @@ public class MainController {
             } else {
                 System.out.println(totalScore);
             }
+
+            if(isMovieTheme=true) {
+                getMovieQuestion();
+                isSportTheme = false;
+            }
+
+            if(isSportTheme = true) {
+                getSportQuestion();
+                isMovieTheme=false;
+            }
+
         }
 
 }
