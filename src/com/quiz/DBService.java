@@ -119,9 +119,40 @@ public class DBService {
             sportLegendTheme.add((SportLegendTheme) sportQuestion);
 
         }
+
         return sportLegendTheme;
 
     }
+//формирование общего листа вопросов
+    public List<Theme> getQuestions() throws
+            SQLException {
+        mainController = new MainController();
+        PreparedStatement pstm = con.prepareStatement("select * from question_answers");
+        ResultSet qat = pstm.executeQuery();
+        List<Theme> questionAnswers = new ArrayList<>();
+        while (qat.next()){
+            Theme questions = new Theme() {
+                @Override
+                public void checkAnswers() {
+
+                }
+            };
+            questions.setId(qat.getInt(1));
+            questions.setThemeId(qat.getInt(2));
+            questions.setQuestion(qat.getString(3));
+            questions.setAnswer(qat.getString(4));
+            questions.setWrongAnswer1(qat.getString(5));
+            questions.setWrongAnswer2(qat.getString(6));
+            questions.setWrongAnswer3(qat.getString(7));
+            questions.setPoint(qat.getInt(8));
+
+            questionAnswers.add((Theme) questions);
+
+        }
+        return questionAnswers;
+
+    }
+
 
 }
 

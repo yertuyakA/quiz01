@@ -41,6 +41,8 @@ public class MainController {
     private static int questionScore;
     private static int totalScore;
     private static int qIndex;
+    private static List<MovieTheme> movieTheme = new ArrayList<>();
+    private static List<SportLegendTheme> sportLegendTheme = new ArrayList<>();
 
     void setActiveLogin(String activeLogin) {
         this.activeLogin = activeLogin;
@@ -182,95 +184,100 @@ public class MainController {
 
     @FXML
     void setBtnMovieTheme() {
+        dbService = new DBService();
         btnSportTheme.setVisible(false);
         btnMovieTheme.setVisible(false);
         labelTheme.setText("Выберите вариант ответа");
         isMovieTheme = true;
-        getMovieQuestion();
+        isSportTheme=false;
         qIndex = 0;
+        totalScore = 0;
+
+        try {
+            movieTheme = dbService.getMovieTheme(1);
+            Collections.shuffle(movieTheme);
+            System.out.println(movieTheme);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        getMovieQuestion();
+
 
     }
 
     public void getMovieQuestion() {
-        dbService = new DBService();
         questionScore = 0;
-        totalScore = 0;
+        Theme movieQuestion = movieTheme.get(qIndex);
+        int questionId = movieQuestion.getId();
+        System.out.println(questionId);
+        questTheme.setText(movieQuestion.getQuestion());
+        rightAnswer = movieQuestion.getAnswer(); //записываем правильный ответ;
+        questionScore = movieQuestion.getPoint(); //записываем балл ответа;
+        System.out.println(rightAnswer);
 
-        try {
-            List<MovieTheme> movieTheme = dbService.getMovieTheme(1);
-            System.out.println(movieTheme);
-            Collections.shuffle(movieTheme);
-            Theme movieQuestion = movieTheme.get(qIndex);
-            int questionId = movieQuestion.getId();
-            System.out.println(questionId);
-            questTheme.setText(movieQuestion.getQuestion());
-            rightAnswer = movieQuestion.getAnswer(); //записываем правильный ответ;
-            questionScore = movieQuestion.getPoint(); //записываем балл ответа;
-            System.out.println(rightAnswer);
-            List<String> answers = new ArrayList<>();
-            answers.add(movieQuestion.getAnswer());
-            answers.add(movieQuestion.getWrongAnswer1());
-            answers.add(movieQuestion.getWrongAnswer2());
-            answers.add(movieQuestion.getWrongAnswer3());
-            Collections.shuffle(answers);
+        List<String> answers = new ArrayList<>();
+        answers.add(movieQuestion.getAnswer());
+        answers.add(movieQuestion.getWrongAnswer1());
+        answers.add(movieQuestion.getWrongAnswer2());
+        answers.add(movieQuestion.getWrongAnswer3());
+        Collections.shuffle(answers);
 
-            answer1.setText(answers.get(0));
-            answer2.setText(answers.get(1));
-            answer3.setText(answers.get(2));
-            answer4.setText(answers.get(3));
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        answer1.setText(answers.get(0));
+        answer2.setText(answers.get(1));
+        answer3.setText(answers.get(2));
+        answer4.setText(answers.get(3));
 
 
-        }
     }
-
 
     @FXML
     void setBtnSportTheme() {
+        dbService = new DBService();
         btnMovieTheme.setVisible(false);
         btnSportTheme.setVisible(false);
         labelTheme.setText("Выберите вариант ответа");
         isSportTheme=true;
-        getSportQuestion();
+        isMovieTheme=false;
         qIndex = 0;
-
-
-    }
-
-    public void getSportQuestion() {
-        dbService = new DBService();
-        questionScore = 0;
         totalScore = 0;
-        //вывод вопросов по выбранной теме
-        try {
-            List<SportLegendTheme> sportLegendTheme = dbService.getSportTheme(2);
-            System.out.println(sportLegendTheme);
-            Collections.shuffle(sportLegendTheme);
-            Theme sportQuestion = sportLegendTheme.get(qIndex);
-            int questionId = sportQuestion.getId();
-            System.out.println(questionId);
-            questTheme.setText(sportQuestion.getQuestion());
-            rightAnswer = sportQuestion.getAnswer(); //записываем правильный ответ;
-            questionScore = sportQuestion.getPoint(); //записываем балл ответа;
-            System.out.println(rightAnswer);
-            List<String> answers = new ArrayList<>();
-            answers.add(sportQuestion.getAnswer());
-            answers.add(sportQuestion.getWrongAnswer1());
-            answers.add(sportQuestion.getWrongAnswer2());
-            answers.add(sportQuestion.getWrongAnswer3());
-            Collections.shuffle(answers);
 
-            answer1.setText(answers.get(0));
-            answer2.setText(answers.get(1));
-            answer3.setText(answers.get(2));
-            answer4.setText(answers.get(3));
+        try {
+            sportLegendTheme = dbService.getSportTheme(2);
+            Collections.shuffle(sportLegendTheme);
+            System.out.println(sportLegendTheme);
 
         } catch (SQLException e) {
             e.printStackTrace();
 
         }
+
+        getSportQuestion();
+
+    }
+
+    public void getSportQuestion() {
+        questionScore = 0;
+        Theme sportQuestion = sportLegendTheme.get(qIndex);
+        int questionId = sportQuestion.getId();
+        System.out.println(questionId);
+        questTheme.setText(sportQuestion.getQuestion());
+        rightAnswer = sportQuestion.getAnswer(); //записываем правильный ответ;
+        questionScore = sportQuestion.getPoint(); //записываем балл ответа;
+        System.out.println(rightAnswer);
+
+        List<String> answers = new ArrayList<>();
+        answers.add(sportQuestion.getAnswer());
+        answers.add(sportQuestion.getWrongAnswer1());
+        answers.add(sportQuestion.getWrongAnswer2());
+        answers.add(sportQuestion.getWrongAnswer3());
+        Collections.shuffle(answers);
+
+        answer1.setText(answers.get(0));
+        answer2.setText(answers.get(1));
+        answer3.setText(answers.get(2));
+        answer4.setText(answers.get(3));
+
     }
 
 //выбор ответов:
@@ -286,6 +293,7 @@ public class MainController {
             answer2.setDisable(true);
             answer3.setDisable(true);
             answer4.setDisable(true);
+            btnNext.setVisible(true);
 
         }
 
@@ -301,6 +309,7 @@ public class MainController {
             answer2.setDisable(true);
             answer3.setDisable(true);
             answer4.setDisable(true);
+            btnNext.setVisible(true);
 
         }
 
@@ -317,6 +326,7 @@ public class MainController {
             answer2.setDisable(true);
             answer3.setDisable(true);
             answer4.setDisable(true);
+            btnNext.setVisible(true);
 
         }
 
@@ -332,6 +342,7 @@ public class MainController {
             answer2.setDisable(true);
             answer3.setDisable(true);
             answer4.setDisable(true);
+            btnNext.setVisible(true);
 
         }
 
@@ -345,25 +356,24 @@ public class MainController {
             answer2.setStyle("-fx-background-color: #B0E0E6;");
             answer3.setStyle("-fx-background-color: #B0E0E6;");
             answer4.setStyle("-fx-background-color: #B0E0E6;");
+            btnNext.setVisible(false);
             qIndex++;
+            System.out.println("Index: "+qIndex);
 
             if (isRight = true) {
                 totalScore = questionScore++;
-                System.out.println(totalScore);
-
+                System.out.println("Total score: "+totalScore);
 
             } else {
                 System.out.println(totalScore);
             }
+            System.out.println("Кино: "+isMovieTheme);
+            System.out.println("Спорт: "+isSportTheme);
 
-            if(isMovieTheme=true) {
-                getMovieQuestion();
-                isSportTheme = false;
-            }
-
-            if(isSportTheme = true) {
+            if(isSportTheme=true) {
                 getSportQuestion();
-                isMovieTheme=false;
+            } else if (isMovieTheme=true){
+                getMovieQuestion();
             }
 
         }
