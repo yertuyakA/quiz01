@@ -52,7 +52,7 @@ public class DBService {
             pstm.setString(1, writeNickname);
             pstm.setString(2, writePassword);
             pstm.setString(3, writeLogin);
-            pstm.execute();
+            pstm.executeUpdate();
         }
 
     public int getMaxScore(String activeLogin) throws
@@ -123,36 +123,13 @@ public class DBService {
         return sportLegendTheme;
 
     }
-//формирование общего листа вопросов
-    public List<Theme> getQuestions() throws
-            SQLException {
-        mainController = new MainController();
-        PreparedStatement pstm = con.prepareStatement("select * from question_answers");
-        ResultSet qat = pstm.executeQuery();
-        List<Theme> questionAnswers = new ArrayList<>();
-        while (qat.next()){
-            Theme questions = new Theme() {
-                @Override
-                public void checkAnswers() {
 
-                }
-            };
-            questions.setId(qat.getInt(1));
-            questions.setThemeId(qat.getInt(2));
-            questions.setQuestion(qat.getString(3));
-            questions.setAnswer(qat.getString(4));
-            questions.setWrongAnswer1(qat.getString(5));
-            questions.setWrongAnswer2(qat.getString(6));
-            questions.setWrongAnswer3(qat.getString(7));
-            questions.setPoint(qat.getInt(8));
-
-            questionAnswers.add((Theme) questions);
-
-        }
-        return questionAnswers;
-
+    public void setMaxScore(String activeLogin, int totalScore) throws SQLException {
+        PreparedStatement pstm = con.prepareStatement ("UPDATE users SET max_score=? WHERE login=?");
+        pstm.setInt(1, totalScore);
+        pstm.setString(2, activeLogin);
+        pstm.executeUpdate();
     }
-
 
 }
 

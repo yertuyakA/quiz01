@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.MainController">
    <children>
-      <Label fx:id="labelTheme" layoutX="42.0" layoutY="43.0" prefHeight="14.0" prefWidth="282.0" text="Выберите тему" />
+      <Label fx:id="labelTheme" layoutX="42.0" layoutY="43.0" prefHeight="18.0" prefWidth="228.0" text="Выберите тему" />
       <Button fx:id="btnSportTheme" layoutX="42.0" layoutY="77.0" mnemonicParsing="false" onAction="#setBtnSportTheme" prefHeight="34.0" prefWidth="228.0" style="-fx-background-color: #F0E68C;" text="Легенды спорта" />
       <Button fx:id="btnMovieTheme" layoutX="333.0" layoutY="77.0" mnemonicParsing="false" onAction="#setBtnMovieTheme" prefHeight="34.0" prefWidth="228.0" style="-fx-background-color: #D8BFD8;" text="Кино" />
       <Button fx:id="answer1" layoutX="42.0" layoutY="213.0" mnemonicParsing="false" onAction="#clickAnswer1" prefHeight="62.0" prefWidth="228.0" style="-fx-background-color: #B0E0E6;" />
@@ -19,6 +19,7 @@
          </font></Label>
       <Button fx:id="btnNext" layoutX="280.0" layoutY="365.0" mnemonicParsing="false" onAction="#clickNext" text="--&gt;" visible="false" />
       <Button fx:id="btnFinish" layoutX="276.0" layoutY="343.0" mnemonicParsing="false" onAction="#clickFinish" text="Finish" visible="false" />
+      <Label fx:id="labelMaxScore" layoutX="335.0" layoutY="43.0" prefHeight="18.0" prefWidth="228.0" />
 
    </children>
 </AnchorPane>

@@ -29,7 +29,7 @@ public class MainController {
     @FXML
     Button mainButton, registerButton, btnTheme, btnScore, btnSimple, btnSportTheme, btnMovieTheme, btnNext, answer1, answer2, answer3, answer4, btnFinish;
     @FXML
-    Label labelNickname, userMaxScore, questTheme, prompt, labelTheme;
+    Label labelNickname, userMaxScore, questTheme, prompt, labelTheme, labelMaxScore;
 
 
     DBService dbService;
@@ -294,6 +294,7 @@ public class MainController {
                 isRight = true;
             } else {
                 answer1.setStyle("-fx-background-color: #FA8072;");
+                isRight = false;
             }
             answer1.setDisable(true);
             answer2.setDisable(true);
@@ -317,6 +318,7 @@ public class MainController {
                 isRight = true;
             } else {
                 answer2.setStyle("-fx-background-color: #FA8072;");
+                isRight = false;
             }
             answer1.setDisable(true);
             answer2.setDisable(true);
@@ -341,6 +343,7 @@ public class MainController {
                 isRight = true;
             } else {
                 answer3.setStyle("-fx-background-color: #FA8072;");
+                isRight = false;
             }
             answer1.setDisable(true);
             answer2.setDisable(true);
@@ -363,6 +366,8 @@ public class MainController {
                 isRight = true;
             } else {
                 answer4.setStyle("-fx-background-color: #FA8072;");
+                isRight = false;
+
             }
             answer1.setDisable(true);
             answer2.setDisable(true);
@@ -392,7 +397,7 @@ public class MainController {
 
             System.out.println("Index: "+qIndex);
 
-            if (isRight = true) {
+            if (isRight) {
                 totalScore = totalScore+questionScore;
                 System.out.println("Total score: "+totalScore);
 
@@ -418,7 +423,10 @@ public class MainController {
 
         @FXML
         void clickFinish() {
-            totalScore=totalScore+questionScore;
+            dbService = new DBService();
+            if(isRight) {
+                totalScore = totalScore + questionScore;
+            }
             labelTheme.setText("Итоговый счет: " + String.valueOf(totalScore));
             questTheme.setVisible(false);
             answer1.setVisible(false);
@@ -426,6 +434,20 @@ public class MainController {
             answer3.setVisible(false);
             answer4.setVisible(false);
             btnFinish.setVisible(false);
+            //перезаписываем max_score в БД;
+            int maxScore = 0;
+            try {
+                maxScore = dbService.getMaxScore(activeLogin);
+                if (totalScore>maxScore) {
+                    dbService.setMaxScore(activeLogin, totalScore);
+                }
+                maxScore = dbService.getMaxScore(activeLogin);
+                labelMaxScore.setText("Лучший результат: " + String.valueOf(maxScore));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+
 
 
         }
