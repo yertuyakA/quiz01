@@ -65,7 +65,6 @@ public class DBService {
         if(sc.next()){
             score = sc.getInt(1);
         }
-        System.out.println(score);
 
         return score;
 

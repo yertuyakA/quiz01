@@ -198,7 +198,6 @@ public class MainController {
         try {
             movieTheme = dbService.getMovieTheme(1);
             Collections.shuffle(movieTheme);
-            System.out.println(movieTheme);
             qSize = movieTheme.size();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -213,11 +212,9 @@ public class MainController {
         questionScore = 0;
         Theme movieQuestion = movieTheme.get(qIndex);
         int questionId = movieQuestion.getId();
-        System.out.println(questionId);
         questTheme.setText(movieQuestion.getQuestion());
         rightAnswer = movieQuestion.getAnswer(); //записываем правильный ответ;
         questionScore = movieQuestion.getPoint(); //записываем балл ответа;
-        System.out.println(rightAnswer);
 
         List<String> answers = new ArrayList<>();
         answers.add(movieQuestion.getAnswer());
@@ -249,7 +246,6 @@ public class MainController {
         try {
             sportLegendTheme = dbService.getSportTheme(2);
             Collections.shuffle(sportLegendTheme);
-            System.out.println(sportLegendTheme);
             qSize = sportLegendTheme.size();
 
         } catch (SQLException e) {
@@ -265,12 +261,9 @@ public class MainController {
         questionScore = 0;
         Theme sportQuestion = sportLegendTheme.get(qIndex);
         int questionId = sportQuestion.getId();
-        System.out.println(questionId);
         questTheme.setText(sportQuestion.getQuestion());
         rightAnswer = sportQuestion.getAnswer(); //записываем правильный ответ;
         questionScore = sportQuestion.getPoint(); //записываем балл ответа;
-        System.out.println(rightAnswer);
-
 
         List<String> answers = new ArrayList<>();
         answers.add(sportQuestion.getAnswer());
@@ -395,20 +388,10 @@ public class MainController {
             answer4.setStyle("-fx-background-color: #B0E0E6;");
             btnNext.setVisible(false);
 
-            System.out.println("Index: "+qIndex);
-
             if (isRight) {
                 totalScore = totalScore+questionScore;
-                System.out.println("Total score: "+totalScore);
-
-            } else {
-                System.out.println(totalScore);
             }
 
-            System.out.println("Кино: "+isMovieTheme);
-            System.out.println("Спорт: "+isSportTheme);
-            System.out.println("Кол-во вопросов (кино): "+movieTheme.size());
-            System.out.println("Кол-во вопросов (спорт): "+sportLegendTheme.size());
             qIndex++;
 
             if(isSportTheme) {
@@ -434,21 +417,19 @@ public class MainController {
             answer3.setVisible(false);
             answer4.setVisible(false);
             btnFinish.setVisible(false);
-            //перезаписываем max_score в БД;
+
             int maxScore = 0;
             try {
+                //перезаписываем лучший результат игры в БД (users);
                 maxScore = dbService.getMaxScore(activeLogin);
                 if (totalScore>maxScore) {
                     dbService.setMaxScore(activeLogin, totalScore);
                 }
                 maxScore = dbService.getMaxScore(activeLogin);
-                labelMaxScore.setText("Лучший результат: " + String.valueOf(maxScore));
+                labelMaxScore.setText("Ваш лучший результат: " + String.valueOf(maxScore));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
-
-
 
         }
 
