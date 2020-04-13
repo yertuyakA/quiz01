@@ -18,6 +18,7 @@
             <Font name="Arial" size="11.0" />
          </font></Label>
       <Button fx:id="btnNext" layoutX="280.0" layoutY="365.0" mnemonicParsing="false" onAction="#clickNext" text="--&gt;" visible="false" />
+      <Button fx:id="btnFinish" layoutX="276.0" layoutY="343.0" mnemonicParsing="false" onAction="#clickFinish" text="Finish" visible="false" />
 
    </children>
 </AnchorPane>

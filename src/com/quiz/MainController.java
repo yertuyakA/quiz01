@@ -27,7 +27,7 @@ public class MainController {
     @FXML
     PasswordField enterPassword;
     @FXML
-    Button mainButton, registerButton, btnTheme, btnScore, btnSimple, btnSportTheme, btnMovieTheme, btnNext, answer1, answer2, answer3, answer4;
+    Button mainButton, registerButton, btnTheme, btnScore, btnSimple, btnSportTheme, btnMovieTheme, btnNext, answer1, answer2, answer3, answer4, btnFinish;
     @FXML
     Label labelNickname, userMaxScore, questTheme, prompt, labelTheme;
 
@@ -43,6 +43,7 @@ public class MainController {
     private static int qIndex;
     private static List<MovieTheme> movieTheme = new ArrayList<>();
     private static List<SportLegendTheme> sportLegendTheme = new ArrayList<>();
+    private static int qSize;
 
     void setActiveLogin(String activeLogin) {
         this.activeLogin = activeLogin;
@@ -192,11 +193,13 @@ public class MainController {
         isSportTheme=false;
         qIndex = 0;
         totalScore = 0;
+        qSize=0;
 
         try {
             movieTheme = dbService.getMovieTheme(1);
             Collections.shuffle(movieTheme);
             System.out.println(movieTheme);
+            qSize = movieTheme.size();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -241,11 +244,13 @@ public class MainController {
         isMovieTheme=false;
         qIndex = 0;
         totalScore = 0;
+        qSize = 0;
 
         try {
             sportLegendTheme = dbService.getSportTheme(2);
             Collections.shuffle(sportLegendTheme);
             System.out.println(sportLegendTheme);
+            qSize = sportLegendTheme.size();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -265,6 +270,7 @@ public class MainController {
         rightAnswer = sportQuestion.getAnswer(); //записываем правильный ответ;
         questionScore = sportQuestion.getPoint(); //записываем балл ответа;
         System.out.println(rightAnswer);
+
 
         List<String> answers = new ArrayList<>();
         answers.add(sportQuestion.getAnswer());
@@ -295,6 +301,13 @@ public class MainController {
             answer4.setDisable(true);
             btnNext.setVisible(true);
 
+            if (qSize-1==qIndex) {
+                btnNext.setVisible(false);
+                btnFinish.setVisible(true);
+            } else {
+                btnNext.setVisible(true);
+            }
+
         }
 
         @FXML
@@ -311,6 +324,13 @@ public class MainController {
             answer4.setDisable(true);
             btnNext.setVisible(true);
 
+            if (qSize-1==qIndex) {
+                btnNext.setVisible(false);
+                btnFinish.setVisible(true);
+            } else {
+                btnNext.setVisible(true);
+            }
+
         }
 
 
@@ -326,7 +346,13 @@ public class MainController {
             answer2.setDisable(true);
             answer3.setDisable(true);
             answer4.setDisable(true);
-            btnNext.setVisible(true);
+
+            if (qSize-1==qIndex) {
+                btnNext.setVisible(false);
+                btnFinish.setVisible(true);
+            } else {
+                btnNext.setVisible(true);
+            }
 
         }
 
@@ -342,7 +368,13 @@ public class MainController {
             answer2.setDisable(true);
             answer3.setDisable(true);
             answer4.setDisable(true);
-            btnNext.setVisible(true);
+
+            if (qSize-1==qIndex) {
+                btnNext.setVisible(false);
+                btnFinish.setVisible(true);
+            } else {
+                btnNext.setVisible(true);
+            }
 
         }
 
@@ -357,24 +389,44 @@ public class MainController {
             answer3.setStyle("-fx-background-color: #B0E0E6;");
             answer4.setStyle("-fx-background-color: #B0E0E6;");
             btnNext.setVisible(false);
-            qIndex++;
+
             System.out.println("Index: "+qIndex);
 
             if (isRight = true) {
-                totalScore = questionScore++;
+                totalScore = totalScore+questionScore;
                 System.out.println("Total score: "+totalScore);
 
             } else {
                 System.out.println(totalScore);
             }
+
             System.out.println("Кино: "+isMovieTheme);
             System.out.println("Спорт: "+isSportTheme);
+            System.out.println("Кол-во вопросов (кино): "+movieTheme.size());
+            System.out.println("Кол-во вопросов (спорт): "+sportLegendTheme.size());
+            qIndex++;
 
-            if(isSportTheme=true) {
+            if(isSportTheme) {
                 getSportQuestion();
-            } else if (isMovieTheme=true){
+            }
+
+            if (isMovieTheme) {
                 getMovieQuestion();
             }
+
+        }
+
+        @FXML
+        void clickFinish() {
+            totalScore=totalScore+questionScore;
+            labelTheme.setText("Итоговый счет: " + String.valueOf(totalScore));
+            questTheme.setVisible(false);
+            answer1.setVisible(false);
+            answer2.setVisible(false);
+            answer3.setVisible(false);
+            answer4.setVisible(false);
+            btnFinish.setVisible(false);
+
 
         }
 
